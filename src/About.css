@@ -1,0 +1,81 @@
+.about-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(8, 8, 10, 0.88);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-content {
+  max-width: 540px;
+  width: 100%;
+  padding: 0 32px;
+  text-align: left;
+}
+
+.about-eyebrow {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(180, 182, 190, 0.5);
+  margin: 0 0 10px;
+}
+
+.about-name {
+  font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-size: clamp(42px, 6vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: rgba(232, 234, 240, 0.95);
+  margin: 0 0 20px;
+  line-height: 1.05;
+}
+
+.about-bio {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(190, 192, 200, 0.72);
+  margin: 0;
+}
+
+.about-divider {
+  width: 40px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 32px 0;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+}
+
+.about-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.about-label {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(160, 162, 170, 0.45);
+}
+
+.about-value {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(210, 212, 220, 0.78);
+}

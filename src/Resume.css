@@ -1,0 +1,183 @@
+.resume-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  overflow-y: auto;
+  background: #fff;
+}
+
+.resume-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 96px 24px 80px;
+}
+
+/* download button */
+.resume-header {
+  margin-bottom: 40px;
+}
+
+.resume-download {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #1d1d1f;
+  text-decoration: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.resume-download:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* project list */
+.resume-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* card */
+.project-card {
+  border: 1px solid rgba(150, 155, 165, 0.35);
+  border-radius: 14px;
+  padding: 20px;
+  background: #fff;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.04),
+    0 0 0 0.5px rgba(180, 185, 195, 0.3);
+}
+
+/* header row: title left, badge right */
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.project-title {
+  font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #1d1d1f;
+  margin: 0;
+}
+
+.project-badge {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #6e6e73;
+  padding: 3px 9px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* body: text left, media right */
+.project-card-body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 20px;
+  align-items: start;
+}
+
+.project-text {
+  text-align: left;
+}
+
+.project-media {
+  flex-shrink: 0;
+}
+
+.project-image {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+  object-fit: cover;
+  max-height: 200px;
+}
+
+.project-media-placeholder {
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.project-subtitle {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1d1d1f;
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.project-desc {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #6e6e73;
+  margin: 0 0 12px;
+}
+
+.project-dates {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 12px;
+  color: #aeaeb2;
+  margin: 12px 0 0;
+  text-align: right;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.project-tag {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: #3a3a3c;
+  padding: 3px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 6px;
+}
+
+.project-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0071e3;
+  text-decoration: none;
+}
+
+.project-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .project-card-body {
+    grid-template-columns: 1fr;
+  }
+  .project-media { order: -1; }
+}
