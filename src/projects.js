@@ -3,12 +3,12 @@ export const projects = [
     id: "ticketing-system",
     title: "Full Stack Ticketing System",
     subtitle: "Building a Full-Stack Ticketing System for Purdue GrandPrix 2027",
-    description: "Current Design Choices: Using Flask for the backend API with SQLite3 for rapid prototyping. Implementing QR code generation for tickets and real-time seat availability tracking.",
+    description: "Building a full-stack ticketing system for Purdue Grand Prix 2027 using FastAPI, SQLite3, OpenCV, and Stripe to handle payments, QR code generation, and secure entry validation. Still in active development, with QR code email delivery, frontend implementation, and stress testing on the roadmap.",
     image: null, // add ticket.jpg to src/assets/
     type: "Project",
     start: "September 2025",
     end: "Present",
-    techStack: ["Python", "Flask", "Sqlite3", "Unit Testing"],
+    techStack: ["Python", "FastAPI", "Sqlite3", "OpenCV", "Stripe API"],
     source: "In Development",
   },
   {
