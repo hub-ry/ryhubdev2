@@ -52,7 +52,9 @@ export default function Resume() {
 
                 <div className="project-media">
                   {p.image
-                    ? <img className="project-image" src={p.image} alt={p.title} />
+                    ? (typeof p.image === 'string' && p.image.includes('.mov')
+                        ? <video className="project-image" src={p.image} autoPlay loop muted playsInline />
+                        : <img className="project-image" src={p.image} alt={p.title} />)
                     : <div className="project-media-placeholder" />
                   }
                 </div>

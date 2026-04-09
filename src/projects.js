@@ -1,3 +1,5 @@
+import chatter from "./assets/chatter-proj.png"
+import serv from "./assets/ssh-serve.mov"
 export const projects = [
   {
     id: "ticketing-system",
@@ -28,7 +30,7 @@ export const projects = [
     title: "Self-Hosted Linux Server",
     subtitle: "Secure remote infrastructure for private application hosting",
     description: "Built and configured a personal Linux server for self-hosting applications and experimentation. Implemented secure remote access via SSH and mesh VPN networking using Tailscale. Configured firewall rules, user permissions, and service management to support reliable, private deployment of containerized applications.",
-    image: null, // add ssh-project.png to src/assets/
+    image: serv, // add ssh-project.png to src/assets/
     type: "Presentation",
     start: "Dec 2025",
     end: "Jan 2026",
@@ -58,8 +60,8 @@ export const projects = [
     id: "chatterbox",
     title: "Chatterbox",
     subtitle: "Social Media Platform Built in CS180 Team Project",
-    description: "This project implements the backend for a social media platform, focusing on both the database and client-server communication. It includes user management, direct messaging, and data persistence using MySQL. The server handles multiple client connections concurrently, with a command-line client application for user interaction.",
-    image: null, // add chatter-proj.png to src/assets/
+    description: "This project implements the backend for a social media platform, focusing on both the database and client-server communication. It includes user management, direct messaging, and data persistence using MySQL. The server handles multiple client connections concurrently, with a command-line client application for user interaction. This is close-source to maintain academic integrity with Purdue University.",
+    image: chatter,
     type: "Project",
     start: "October 2024",
     end: "December 2024",
