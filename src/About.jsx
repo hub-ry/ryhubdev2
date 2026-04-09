@@ -19,11 +19,11 @@ export default function About({ onClose }) {
         exit={{ opacity: 0, y: 24 }}
         transition={{ duration: 0.45, delay: 0.1 }}
       >
-        <p className="about-eyebrow">Hi, here is my name</p>
+        <p className="about-eyebrow">Hi! My name is</p>
         <h1 className="about-name">Ryan Hubbart</h1>
 
         <p className="about-bio">
-          My name is Ryan, I'm a sophomore in college. I'm interested in marketing, language, and music.
+          I'm a sophomore studying Computer Science at Purdue with concentrations in graphics+visualization and machine learning. I'm interested in XR, Application Development, and Marketing. Check out my projects under the Resume tab! Side note, the background photo is actually Alcatraz.
         </p>
 
         <div className="about-divider" />
@@ -39,11 +39,11 @@ export default function About({ onClose }) {
           </div>
           <div className="about-block">
             <span className="about-label">LinkedIn</span>
-            <span className="about-value"><a href="https://www.linkedin.com/in/ryanhubbart/">link 4 u</a></span>
+            <span className="about-value"><a href="https://www.linkedin.com/in/ryanhubbart/">my-linkedin</a></span>
           </div>
           <div className="about-block">
             <span className="about-label">Currently</span>
-            <span className="about-value">I just built a fun mobile app with the Spotify API. If you haven't checked, the resume tab holds my projects too.</span>
+            <span className="about-value">I'm currently building BoilerGPA, a more useful GPA calculator for Purdue Students.</span>
           </div>
         </div>
       </motion.div>

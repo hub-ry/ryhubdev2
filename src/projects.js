@@ -4,26 +4,14 @@ export const projects = [
   {
     id: "ticketing-system",
     title: "Full Stack Ticketing System",
-    subtitle: "Building a Full-Stack Ticketing System for Purdue GrandPrix 2027",
-    description: "Building a full-stack ticketing system for Purdue Grand Prix 2027 using FastAPI, SQLite3, OpenCV, and Stripe to handle payments, QR code generation, and secure entry validation. Still in active development, with QR code email delivery, frontend implementation, and stress testing on the roadmap.",
+    subtitle: "Building a Full-Stack Ticketing System",
+    description: "Building a full-stack ticketing system to pitch to Purdue Grand Prix 2027 using FastAPI, SQLite3, OpenCV, and Stripe to handle payments, QR code generation, and secure entry validation. Still in active development, with QR code email delivery, frontend implementation, and stress testing on the roadmap.",
     image: null, // add ticket.jpg to src/assets/
     type: "Project",
     start: "September 2025",
-    end: "Present",
+    end: "March 2026",
     techStack: ["Python", "FastAPI", "Sqlite3", "OpenCV", "Stripe API"],
-    source: "In Development",
-  },
-  {
-    id: "attendance-automation",
-    title: "Attendance Automation",
-    subtitle: "Automated meeting and office hours attendance using Python and Excel in my role at Purdue Grand Prix.",
-    description: "Included openpyxl to automate meeting attendance through pulling from Microsoft Forms, coloring cells, and reuploading to cloud. An idea I have is to work with an OCR library like Tesseract to work with paper logs more efficiently.",
-    image: null, // add attendance.jpg to src/assets/
-    type: "Presentation",
-    start: "September 2025",
-    end: "October 2025",
-    techStack: ["Python", "Excel"],
-    source: "Closed Source",
+    source: "Closed-Source",
   },
   {
     id: "personal-server",
@@ -47,13 +35,12 @@ export const projects = [
     description: "Designed and deployed a private, self-hosted fitness tracking platform running on a Linux server, accessible securely via Tailscale VPN. Implemented real-time data logging through iOS Shortcuts and built a live visualization dashboard using Svelte. Containerized services with Docker for portability and automated restarts.",
     image: null, // add gym-proj.png to src/assets/
     type: "Project",
-    start: "Aug 2025",
+    start: "May 2025",
     end: "Feb 2026",
     techStack: ["Python", "FastAPI", "Svelte", "Chart.js", "Docker", "Tailscale", "Linux Server"],
     source: "Open Source",
     links: [
       { label: "Repository", url: "https://github.com/hub-ry/protocol" },
-      { label: "Live Demo", url: "https://hub-ry.github.io/protocol-demo/" },
     ],
   },
   {
