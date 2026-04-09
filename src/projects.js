@@ -1,12 +1,13 @@
 import chatter from "./assets/chatter-proj.png"
 import serv from "./assets/ssh-serve.mov"
+import ticket from "./assets/ticket.png"
 export const projects = [
   {
     id: "ticketing-system",
     title: "Full Stack Ticketing System",
     subtitle: "Building a Full-Stack Ticketing System",
     description: "Building a full-stack ticketing system to pitch to Purdue Grand Prix 2027 using FastAPI, SQLite3, OpenCV, and Stripe to handle payments, QR code generation, and secure entry validation. Still in active development, with QR code email delivery, frontend implementation, and stress testing on the roadmap.",
-    image: null, // add ticket.jpg to src/assets/
+    image: ticket,
     type: "Project",
     start: "September 2025",
     end: "March 2026",
