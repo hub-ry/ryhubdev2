@@ -1,19 +1,9 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import './Nav.css'
 
 const EMAIL = 'rhubbart@purdue.edu'
 
 export default function Nav({ activeSection, onNav, light }) {
-  const [showContact, setShowContact] = useState(false)
-  const [copied, setCopied] = useState(false)
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(EMAIL)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
-
   const atTop = activeSection !== null
 
   return (
@@ -26,25 +16,8 @@ export default function Nav({ activeSection, onNav, light }) {
       transition={{ type: 'spring', stiffness: 280, damping: 28 }}
     >
       <button className="nav-btn" onClick={() => onNav('about')}>About</button>
-
-      <div
-        className="contact-wrap"
-        onMouseEnter={() => setShowContact(true)}
-        onMouseLeave={() => setShowContact(false)}
-      >
-        <button className="nav-btn">Contact</button>
-        {showContact && (
-          <div className="contact-card">
-            <div className="contact-card-inner">
-              <button className="contact-email" onClick={handleCopy}>
-                {copied ? '✓ Copied!' : `✉ ${EMAIL}`}
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
-      <button className="nav-btn" onClick={() => onNav('resume')}>Resume</button>
+      <button className="nav-btn" onClick={() => onNav('resume')}>Projects</button>
+      <a className="nav-btn" href={`mailto:${EMAIL}`}>Contact</a>
     </motion.nav>
   )
 }

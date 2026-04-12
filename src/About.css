@@ -2,80 +2,71 @@
   position: fixed;
   inset: 0;
   z-index: 50;
-  background: rgba(8, 8, 10, 0.88);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.about-content {
-  max-width: 540px;
-  width: 100%;
-  padding: 0 32px;
-  text-align: left;
+/* Solid color layer that fades in as mouse approaches center */
+.about-color-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: opacity 0.08s linear;
+}
+
+/* Text sits centered above everything */
+.about-text-layer {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  transition: opacity 0.15s ease;
 }
 
 .about-eyebrow {
   font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(180, 182, 190, 0.5);
-  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 14px;
 }
 
 .about-name {
   font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
-  font-size: clamp(42px, 6vw, 64px);
-  font-weight: 600;
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 700;
   letter-spacing: -0.03em;
-  color: rgba(232, 234, 240, 0.95);
+  line-height: 1.0;
   margin: 0 0 20px;
-  line-height: 1.05;
+  color: #ffffff;
 }
 
-.about-bio {
+.about-subtitle {
   font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  font-size: 16px;
-  line-height: 1.65;
-  color: rgba(190, 192, 200, 0.72);
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.65);
   margin: 0;
+  min-height: 1.4em;
 }
 
-.about-divider {
-  width: 40px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.12);
-  margin: 32px 0;
+/* Blinking cursor after typed text */
+.about-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background: rgba(192, 132, 252, 0.8);
+  margin-left: 4px;
+  vertical-align: middle;
+  border-radius: 1px;
+  animation: cursorBlink 0.9s ease-in-out infinite;
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 40px;
-}
-
-.about-block {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.about-label {
-  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(160, 162, 170, 0.45);
-}
-
-.about-value {
-  font-family: -apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(210, 212, 220, 0.78);
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }

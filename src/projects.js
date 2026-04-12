@@ -19,7 +19,8 @@ export const projects = [
     title: "Self-Hosted Linux Server",
     subtitle: "Secure remote infrastructure for private application hosting",
     description: "Built and configured a personal Linux server for self-hosting applications and experimentation. Implemented secure remote access via SSH and mesh VPN networking using Tailscale. Configured firewall rules, user permissions, and service management to support reliable, private deployment of containerized applications.",
-    image: serv, // add ssh-project.png to src/assets/
+    image: null,
+    video: serv,
     type: "Presentation",
     start: "Dec 2025",
     end: "Jan 2026",

@@ -1,17 +1,25 @@
-import bgImg from './assets/background.jpg'
+import bgVideo from './assets/background1.mp4'
 
 export default function Background() {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: -1 }}>
-      {/* base image, barely blurred */}
-      <div style={{
-        position: 'absolute',
-        inset: '-4px',
-        backgroundImage: `url(${bgImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        filter: 'blur(1.5px)',
-      }} />
+      {/* base video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute',
+          inset: '-4px',
+          width: 'calc(100% + 8px)',
+          height: 'calc(100% + 8px)',
+          objectFit: 'cover',
+          filter: 'blur(1.5px)',
+        }}
+      >
+        <source src={bgVideo} type="video/mp4" />
+      </video>
       {/* subtle fog — thin mist, not a white wash */}
       <div style={{
         position: 'absolute',
