@@ -1,41 +1,15 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-const USERNAME = 'hub-ry'
-
-const QUERY = `{
-  user(login: "${USERNAME}") {
-    pinnedItems(first: 6, types: REPOSITORY) {
-      nodes {
-        ... on Repository {
-          name
-          description
-          url
-          primaryLanguage { name color }
-        }
-      }
-    }
-  }
-}`
-
 export default function Projects() {
   const [repos, setRepos] = useState(null)
-  const token = import.meta.env.VITE_GITHUB_TOKEN
 
   useEffect(() => {
-    if (!token) return
-    fetch('https://api.github.com/graphql', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query: QUERY }),
-    })
+    fetch('/api/github?type=projects')
       .then(r => r.json())
       .then(json => setRepos(json.data?.user?.pinnedItems?.nodes ?? []))
       .catch(() => setRepos([]))
-  }, [token])
+  }, [])
 
   if (!repos) return null
 
