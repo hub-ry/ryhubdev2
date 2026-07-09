@@ -49,10 +49,9 @@ const EXPERIENCE = [
 ]
 
 const PROJECTS = [
-  { name: 'Open Source Event Ticketing System', href: '#', live: '', tag: 'Python', desc: 'A SAAS project, fun fact: ticketmaster is considered an illegal monopoly.' },
-  { name: 'Content Ranking Engine', href: '#', live: '', tag: 'C++', desc: '' },
-  { name: 'BoilerGPA', href: '#', live: '', tag: 'React', desc: '' },
-  { name: 'Music Sharing Platform', href: '#', live: '', tag: 'WIP', desc: '' },
+  { name: 'Open Source Event Ticketing System', href: '#', live: '', tags: ['Python'], desc: 'A SAAS project, fun fact: ticketmaster is considered an illegal monopoly.' },
+  { name: 'Content Ranking Engine', href: '#', live: '', tags: ['C++'], desc: '' },
+  { name: 'Music Sharing Platform', href: 'https://spores-opal.vercel.app/', live: '', tags: ['React', 'Turso', 'd3-force'], desc: 'This site turns a groups playlists into a living graph.' },
 ]
 
 const SKILLS = ['C++', 'Python', 'TypeScript', 'React', 'C', 'Docker', 'Linux', 'Git', 'PostgreSQL', 'Java'
@@ -123,7 +122,11 @@ export default function Boring({ dark, setDark }) {
                     </a>
                   )}
                 </span>
-                <span className="r-tag">{p.tag}</span>
+                <span className="r-tags">
+                  {p.tags.map(t => (
+                    <span key={t} className="r-tag">{t}</span>
+                  ))}
+                </span>
               </div>
               <p className="r-entry-line">{p.desc}</p>
             </div>

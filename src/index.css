@@ -269,6 +269,14 @@ body {
   color: var(--text);
 }
 
+.r-tags {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
 .r-tag {
   flex-shrink: 0;
   font-size: 11px;
