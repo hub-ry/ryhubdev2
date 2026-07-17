@@ -49,12 +49,10 @@ const EXPERIENCE = [
 ]
 
 const PROJECTS = [
-  { name: 'Open Source Event Ticketing System', href: '#', live: '', tags: ['Python'], desc: 'A SAAS project, fun fact: ticketmaster is considered an illegal monopoly.' },
-  { name: 'Content Ranking Engine', href: '#', live: '', tags: ['C++'], desc: '' },
-  { name: 'Music Sharing Platform', href: 'https://spores-opal.vercel.app/', live: '', tags: ['React', 'Turso', 'd3-force'], desc: 'This site turns a groups playlists into a living graph.' },
+  { name: 'Open Source Event Ticketing System', href: '#', live: '', tags: ['Python'], desc: 'A SAAS project.' },  { name: 'Content Ranking Engine', href: '#', live: '', tags: ['C++'], desc: '' },
 ]
 
-const SKILLS = ['C++', 'Python', 'TypeScript', 'React', 'C', 'Docker', 'Linux', 'Git', 'PostgreSQL', 'Java'
+const SKILLS = ['C++', 'C', 'Python', 'RestAPI', 'TypeScript', 'React', 'Docker', 'Linux', 'Git', 'PostgreSQL', 'Java', 'Assembly / ARM'
 ]
 
 /* ───────────────────────────────────────────── */
