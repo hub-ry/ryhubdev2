@@ -10,9 +10,9 @@ function App() {
   }, [dark])
 
   const path = window.location.pathname
-  const isBoring = path === '/boring' || path.startsWith('/boring/')
+  const isResume = path === '/resume' || path.startsWith('/resume/')
 
-  return isBoring ? <Boring dark={dark} setDark={setDark} /> : <Home />
+  return isResume ? <Boring dark={dark} setDark={setDark} /> : <Home />
 }
 
 export default App

@@ -37,8 +37,8 @@ export default function Home() {
           ))}
         </div>
 
-        <a className="home-link" href="/boring">
-          ryhub.dev/boring
+        <a className="home-link" href="/resume">
+          ryhub.dev/resume
         </a>
       </div>
     </div>

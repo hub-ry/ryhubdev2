@@ -26,7 +26,7 @@ function MoonIcon() {
 }
 
 /* ─────────────────────────────────────────────
-   Edit everything below to update the /boring page.
+   Edit everything below to update the /resume page.
    ───────────────────────────────────────────── */
 
 const NAME = 'Ryan Hubbart'
