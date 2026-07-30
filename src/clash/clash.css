@@ -107,6 +107,36 @@
   cursor: default;
 }
 
+.c-btn.is-big {
+  font-size: 14px;
+  padding: 11px 20px;
+  border-radius: 6px;
+}
+
+.c-btn.is-big:hover {
+  opacity: 0.85;
+}
+
+/* Reset affordance, repeated at the top and bottom of a plan. */
+.c-newexport {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 24px;
+}
+
+.c-newexport .c-fine {
+  margin: 0;
+  flex: 1 1 22ch;
+}
+
+.c-section + .c-newexport {
+  margin-top: 34px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
 .c-btn.is-quiet {
   color: var(--muted);
   background: none;
@@ -143,7 +173,6 @@
   color: var(--warnc);
 }
 
-.c-reset,
 .c-more,
 .c-toggle {
   font-family: var(--font-mono);
@@ -158,7 +187,6 @@
   text-decoration-color: var(--border);
 }
 
-.c-reset:hover,
 .c-more:hover,
 .c-toggle:hover {
   color: var(--text);

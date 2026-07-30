@@ -62,6 +62,47 @@ export function nextLevel(entity, current, caps) {
   return { maxed: false, level: target, gate, blocked: !!gate }
 }
 
+// Which building each gate corresponds to, so a ceiling can be traced back to
+// the thing that actually imposes it.
+const GATE_BUILDING = {
+  heroHall: 'heroHall',
+  lab: 'laboratory',
+  petHouse: 'petHouse',
+  blacksmith: 'blacksmith',
+}
+
+/**
+ * Given the gate blocking an upgrade, work out whether it is the Town Hall's
+ * fault or a sub-building's.
+ *
+ * This matters more than it looks. Right after a Town Hall upgrade the Hero
+ * Hall, Lab and Pet House all sit below their new ceiling, so heroes and troops
+ * are pinned by a building you can upgrade *today*. Reporting that as "maxed
+ * for this Town Hall" would send you to the Town Hall button - which is the one
+ * thing a rushed account must not do before its offense buildings are done.
+ */
+export function gateSource(village, gate) {
+  if (!gate) return null
+  if (gate.kind === 'townHall') return { gate, fixable: false, entity: null }
+
+  const key = GATE_BUILDING[gate.kind]
+  const dataId = key ? IDS[key] : null
+  const entity = dataId ? entities[dataId] : null
+  if (!entity) return { gate, fixable: false, entity: null }
+
+  const level = village.groups.get(dataId)?.maxLevel ?? 0
+  const next = nextLevel(entity, level, capsOf(village))
+  return {
+    gate,
+    entity,
+    dataId,
+    level,
+    next,
+    // Fixable now = this building can be upgraded without touching the Town Hall.
+    fixable: !next.maxed && !next.blocked,
+  }
+}
+
 export function capsOf(village) {
   return {
     townHall: village.townHallLevel,
@@ -245,6 +286,10 @@ export function heroPlan(village) {
       level,
       capped: capLevel(entity, caps),
       atCap: unlocked && level >= capLevel(entity, caps),
+      // What is actually holding this hero, and can it be lifted right now?
+      // Only meaningful for heroes you have - a hero you have not unlocked yet
+      // is "gated" by every requirement at once, which tells you nothing.
+      cappedBy: unlocked ? gateSource(village, next.gate) : null,
       maxLevel: levels[levels.length - 1]?.l ?? level,
       next,
       upgrading,
@@ -554,6 +599,9 @@ export function upgradeQueue(village) {
       : 'One hero down 24/7, no exceptions. This is the longest marathon in the game.'
   )
 
+  // How many heroes are pinned by the Hero Hall right now.
+  const heldByHall = heroes.heroes.filter((h) => h.cappedBy?.fixable && h.cappedBy.dataId === IDS.heroHall).length
+
   for (const id of TIER2) {
     const c = buildingCandidate(
       village,
@@ -564,9 +612,16 @@ export function upgradeQueue(village) {
         ? 'More troops on every single attack. Balance assumes you have the full complement.'
         : id === IDS.blacksmith
           ? 'Stores more ore and unlocks higher equipment levels. Overflowing ore is unrecoverable.'
-          : 'Gates your hero levels.'
+          : heldByHall
+            ? `Gating ${heldByHall} hero${heldByHall > 1 ? 'es' : ''} right now - nothing else you build moves your offense until this does.`
+            : 'Gates your hero levels.'
     )
-    if (c) out.push(c)
+    // A Hero Hall that is actively pinning heroes outranks everything else in
+    // its tier.
+    if (c) {
+      if (id === IDS.heroHall && heldByHall) c.urgent = true
+      out.push(c)
+    }
   }
 
   for (const id of TIER3) {
@@ -622,7 +677,7 @@ export function upgradeQueue(village) {
     }
   }
 
-  out.sort((a, b) => a.tier.rank - b.tier.rank || a.secs - b.secs)
+  out.sort((a, b) => a.tier.rank - b.tier.rank || Number(!!b.urgent) - Number(!!a.urgent) || a.secs - b.secs)
   return { queue: out, heroes, townHall: th }
 }
 
@@ -747,7 +802,16 @@ export function alerts(village, { workAvailable = true } = {}) {
   const lab = labPlan(village)
   const walls = wallStatus(village)
 
-  const add = (level, title, body) => out.push({ level, title, body })
+  // `fix` tells the verdict what to actually recommend. Without it, every
+  // critical alert would collapse into "upgrade the Town Hall".
+  const add = (level, title, body, fix = null) => out.push({ level, title, body, fix })
+  const fixBuilding = (src) => ({
+    kind: 'building',
+    entity: src.entity,
+    dataId: src.dataId,
+    from: src.level,
+    to: src.next.level.l,
+  })
 
   // The guide's trigger is an idle builder with *nothing worth building* - that
   // means the Town Hall should already be upgrading. An idle builder with work
@@ -770,19 +834,51 @@ export function alerts(village, { workAvailable = true } = {}) {
   }
 
   const maxedHeroes = heroes.heroes.filter((h) => h.unlocked && h.atCap)
-  if (maxedHeroes.length && !village.isMaxTownHall) {
+  if (maxedHeroes.length) {
     const names = maxedHeroes.map((h) => h.entity.name)
-    add(
-      'critical',
-      names.length === 1
-        ? `${names[0]} is maxed for this Town Hall`
-        : `${names.length} heroes are maxed for this Town Hall`,
-      `${names.join(', ')} cannot go further until the Hero Hall does, and the Hero Hall is waiting on the Town Hall. A maxed hero below max TH is the guide's clearest sign you are moving too slowly.`
-    )
+    const list = names.join(', ')
+    // If the Hero Hall is itself upgradeable, it - not the Town Hall - is the
+    // thing standing in the way. This is the normal state right after a Town
+    // Hall upgrade, and sending you to the Town Hall here would be wrong.
+    const hall = maxedHeroes.map((h) => h.cappedBy).find((c) => c?.fixable)
+    if (hall) {
+      add(
+        'critical',
+        `Hero Hall ${hall.level} is holding ${names.length === 1 ? names[0] : `${names.length} heroes`} back`,
+        `${list} cannot go further until the Hero Hall does, and your Hero Hall can be upgraded right now (${hall.level} → ${hall.next.level.l}). Do that before touching the Town Hall.`,
+        fixBuilding(hall)
+      )
+    } else if (!village.isMaxTownHall) {
+      add(
+        'critical',
+        names.length === 1
+          ? `${names[0]} is maxed for this Town Hall`
+          : `${names.length} heroes are maxed for this Town Hall`,
+        `${list} cannot go further, and the Hero Hall is already at its ceiling for TH${th}. A maxed hero below max TH is the guide's clearest sign you are moving too slowly.`,
+        { kind: 'townHall' }
+      )
+    }
   }
 
-  if (!lab.anyAvailable && !village.isMaxTownHall) {
-    add('critical', 'Lab has nothing left to research', 'Maxed lab below max TH is one of the guide\'s hard triggers. Upgrade the Town Hall.')
+  if (!lab.anyAvailable) {
+    // Same trap as the Hero Hall: a Lab below its own Town Hall ceiling is the
+    // blocker, not the Town Hall.
+    const labSrc = gateSource(village, { kind: 'lab', label: `Laboratory ${lab.level + 1}` })
+    if (labSrc?.fixable) {
+      add(
+        'critical',
+        `Laboratory ${lab.level} has nothing left to research`,
+        `Every troop you can research is capped by the Lab, and the Lab can be upgraded right now (${labSrc.level} → ${labSrc.next.level.l}). Upgrade it before the Town Hall.`,
+        fixBuilding(labSrc)
+      )
+    } else if (!village.isMaxTownHall) {
+      add(
+        'critical',
+        'Lab has nothing left to research',
+        `The Lab is already at its ceiling for TH${th}, so there is genuinely nothing left to research. A maxed lab below max TH is one of the guide's hard triggers.`,
+        { kind: 'townHall' }
+      )
+    }
   } else if (!lab.busy) {
     add('warn', 'Lab is idle', 'Lab time is the biggest single bottleneck to a fully maxed account. Never leave it empty.')
   }
@@ -886,11 +982,26 @@ export function magicItemPlan(village) {
 function verdict(village, { alerts: list, queue, townHallPlan: thp, heroes }) {
   const hardTrigger = list.find((a) => a.level === 'critical')
 
-  if (!village.isMaxTownHall && hardTrigger) {
+  // A blocker you can clear with a builder today always beats a Town Hall
+  // upgrade - that is the whole point of the priority list.
+  const buildingFix = list.find((a) => a.level === 'critical' && a.fix?.kind === 'building')
+  if (buildingFix) {
+    const f = buildingFix.fix
+    return {
+      headline: `${f.entity.name} ${f.from} → ${f.to}.`,
+      body: buildingFix.body,
+      tone: 'critical',
+      // Flagged so the Flags list can skip it rather than repeat it verbatim.
+      from: buildingFix,
+    }
+  }
+
+  if (!village.isMaxTownHall && hardTrigger?.fix?.kind === 'townHall') {
     return {
       headline: `Upgrade to Town Hall ${thp.target}.`,
       body: `${hardTrigger.title}. The guide treats that as a hard trigger - you are past the point where staying here costs you nothing.`,
       tone: 'critical',
+      from: hardTrigger,
     }
   }
   if (!village.isMaxTownHall && thp.ready) {

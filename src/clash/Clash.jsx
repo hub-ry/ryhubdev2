@@ -16,6 +16,7 @@ import {
   Defenses,
   InProgress,
   Meta,
+  NewExport,
 } from './Sections.jsx'
 import ThemeToggle from '../ThemeToggle.jsx'
 import './clash.css'
@@ -160,9 +161,10 @@ export default function Clash({ dark, setDark }) {
           </>
         ) : (
           <>
-            <Meta village={plan.village} plan={plan} source={gamedata.source} onReset={reset} />
+            <Meta village={plan.village} plan={plan} source={gamedata.source} />
+            <NewExport onReset={reset} takenAt={plan.village.takenAt} />
             <Verdict verdict={plan.verdict} />
-            <Flags alerts={plan.alerts} />
+            <Flags alerts={plan.alerts} verdict={plan.verdict} />
             <Queue queue={plan.queue} />
             <TownHall plan={plan.townHallPlan} maxTownHall={plan.maxTownHall} />
             <InProgress village={plan.village} />
@@ -172,6 +174,7 @@ export default function Clash({ dark, setDark }) {
             <Lab lab={plan.lab} />
             <MagicItems magic={plan.magic} />
             <Defenses village={plan.village} plan={plan} />
+            <NewExport onReset={reset} takenAt={plan.village.takenAt} />
           </>
         )}
 

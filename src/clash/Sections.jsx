@@ -25,12 +25,15 @@ export function Verdict({ verdict }) {
   )
 }
 
-export function Flags({ alerts }) {
-  if (!alerts.length) return null
+export function Flags({ alerts, verdict }) {
+  // The verdict already states one alert in full; repeating it directly
+  // underneath is just noise.
+  const shown = alerts.filter((a) => a !== verdict?.from)
+  if (!shown.length) return null
   return (
     <Section label="Flags">
       <ul className="c-flags">
-        {alerts.map((a, i) => (
+        {shown.map((a, i) => (
           <li key={i} className={`c-flag is-${a.level}`}>
             <span className="c-flag-dot" aria-hidden="true" />
             <div>
@@ -194,6 +197,11 @@ export function Heroes({ heroes, primary }) {
               <td>
                 {h.upgrading ? (
                   <span className="c-live">upgrading · {duration(h.upgrading.timer)} left</span>
+                ) : h.cappedBy?.fixable ? (
+                  // Held by a building you can upgrade today, not by the Town Hall.
+                  <span className="c-bad">
+                    held by {h.cappedBy.entity.name} {h.cappedBy.level}
+                  </span>
                 ) : h.atCap ? (
                   <span className="c-bad">maxed for this TH</span>
                 ) : h.next.blocked ? (
@@ -533,7 +541,27 @@ export function InProgress({ village }) {
   )
 }
 
-export function Meta({ village, plan, source, onReset }) {
+/**
+ * Paste a fresh export. Offered at the top and again at the bottom, since a
+ * snapshot goes stale the moment anything finishes and the plan is long enough
+ * that scrolling back up to a small link is a nuisance.
+ */
+export function NewExport({ onReset, takenAt }) {
+  return (
+    <div className="c-newexport">
+      <button className="c-btn is-big" onClick={onReset}>
+        paste a new export
+      </button>
+      <span className="c-fine">
+        {takenAt
+          ? `This plan is from a snapshot taken ${ago(takenAt)}. Re-export from the game for current timers.`
+          : 'Re-export from the game whenever you want current timers.'}
+      </span>
+    </div>
+  )
+}
+
+export function Meta({ village, plan, source }) {
   return (
     <div className="c-meta">
       <span className="c-meta-tag">{village.tag ?? 'unknown tag'}</span>
@@ -542,9 +570,6 @@ export function Meta({ village, plan, source, onReset }) {
         {village.builders.busy}/{village.builders.total} builders
       </span>
       {village.takenAt ? <span>snapshot {ago(village.takenAt)}</span> : null}
-      <button className="c-reset" onClick={onReset}>
-        start over
-      </button>
       {plan.datasetLag.length ? (
         <span className="c-lag" title={plan.datasetLag.map((d) => `${d.entity.name} ${d.owned} > ${d.known}`).join(', ')}>
           game data is behind on {plan.datasetLag.length}
