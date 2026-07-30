@@ -1,0 +1,710 @@
+/* ryhub.dev/clash - same restraint as /resume: mono type, hairlines, no chrome. */
+
+.clash {
+  --ok: #4d9a63;
+  --bad: #c1553f;
+  --warnc: #b58b3a;
+}
+
+:root[data-theme='light'] .clash {
+  --ok: #2f7043;
+  --bad: #9c3b28;
+  --warnc: #8a6520;
+}
+
+.clash {
+  position: relative;
+}
+
+/* This page scrolls a long way. Fixed corner controls would sit on top of the
+   content the whole way down, so let them scroll away instead. */
+.clash .back-home,
+.clash .theme-toggle {
+  position: absolute;
+}
+
+.c-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 72px 28px 96px;
+}
+
+/* ── header ── */
+
+.c-head {
+  margin-bottom: 40px;
+}
+
+.c-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: -0.4px;
+  line-height: 1.1;
+}
+
+.c-sub {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+/* ── paste ── */
+
+.c-how {
+  margin: 0 0 20px 18px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+.c-how em {
+  font-style: normal;
+  color: var(--text);
+}
+
+.c-input {
+  width: 100%;
+  padding: 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--chip-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.c-input:focus {
+  outline: none;
+  border-color: var(--muted);
+}
+
+.c-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.c-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--bg);
+  background: var(--text);
+  border: 1px solid var(--text);
+  border-radius: 5px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.c-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.c-btn.is-quiet {
+  color: var(--muted);
+  background: none;
+  border-color: var(--chip-border);
+}
+
+.c-btn.is-quiet:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+/* ── meta strip ── */
+
+.c-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.c-meta-tag {
+  color: var(--text);
+}
+
+.c-meta-src {
+  opacity: 0.55;
+}
+
+.c-lag {
+  color: var(--warnc);
+}
+
+.c-reset,
+.c-more,
+.c-toggle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border);
+}
+
+.c-reset:hover,
+.c-more:hover,
+.c-toggle:hover {
+  color: var(--text);
+}
+
+.c-toggle {
+  text-decoration: none;
+  border: 1px solid var(--chip-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.c-toggle.is-on {
+  color: var(--text);
+  border-color: var(--muted);
+}
+
+/* ── verdict ── */
+
+.c-verdict {
+  margin: 32px 0 8px;
+  padding-left: 14px;
+  border-left: 2px solid var(--muted);
+}
+
+.c-verdict.is-critical {
+  border-left-color: var(--bad);
+}
+
+.c-verdict-head {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+}
+
+.c-verdict-body {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* ── sections ── */
+
+.c-section {
+  margin-top: 34px;
+  padding-top: 30px;
+  border-top: 1px solid var(--border);
+}
+
+.c-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.c-label-note {
+  letter-spacing: 0;
+  text-transform: none;
+  opacity: 0.75;
+}
+
+.c-empty,
+.c-fine {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 64ch;
+}
+
+.c-fine {
+  margin-top: 14px;
+}
+
+/* Copy that introduces a table rather than trailing it. */
+.c-lead {
+  margin-top: 0;
+  margin-bottom: 18px;
+}
+
+.c-fine em {
+  font-style: italic;
+  color: var(--text);
+}
+
+.c-bad {
+  color: var(--bad);
+}
+
+.c-live {
+  color: var(--ok);
+}
+
+.c-error {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--bad);
+}
+
+/* ── flags ── */
+
+.c-flags {
+  list-style: none;
+}
+
+.c-flag {
+  display: flex;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.c-flag:last-child {
+  border-bottom: none;
+}
+
+.c-flag-dot {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.c-flag.is-critical .c-flag-dot {
+  background: var(--bad);
+}
+
+.c-flag.is-warn .c-flag-dot {
+  background: var(--warnc);
+}
+
+.c-flag-title {
+  font-size: 13px;
+}
+
+.c-flag.is-critical .c-flag-title {
+  color: var(--bad);
+}
+
+.c-flag-body {
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+/* ── queue ── */
+
+.c-queue {
+  list-style: none;
+}
+
+.c-tier {
+  margin: 20px 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.c-row:first-child .c-tier {
+  margin-top: 0;
+}
+
+.c-row {
+  padding: 3px 0 9px;
+}
+
+.c-row-main {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.c-row-n {
+  flex-shrink: 0;
+  width: 22px;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.c-row-name {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.c-row-move {
+  flex-shrink: 0;
+  min-width: 78px;
+  text-align: right;
+  color: var(--text);
+}
+
+.c-row-meta {
+  flex-shrink: 0;
+  min-width: 74px;
+  text-align: right;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.c-row-why {
+  margin: 3px 0 0 34px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  opacity: 0.85;
+  max-width: 60ch;
+}
+
+/* ── town hall checks ── */
+
+.c-gate {
+  font-size: 13px;
+  color: var(--bad);
+  margin-bottom: 16px;
+}
+
+.c-gate.is-ready {
+  color: var(--ok);
+}
+
+.c-checks {
+  list-style: none;
+}
+
+.c-check {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 4px 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.c-check:last-child {
+  border-bottom: none;
+}
+
+.c-check-mark {
+  color: var(--bad);
+}
+
+.c-check.is-ok .c-check-mark {
+  color: var(--ok);
+}
+
+.c-check.is-soft .c-check-mark {
+  color: var(--muted);
+}
+
+.c-check-detail {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.c-check-note {
+  grid-column: 2 / -1;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+/* ── blocked ── */
+
+.c-blocked {
+  list-style: none;
+}
+
+.c-blocked li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.c-blocked li:last-child {
+  border-bottom: none;
+}
+
+.c-blocked-gate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.c-blocked-count {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.c-blocked-items {
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--muted);
+  opacity: 0.8;
+}
+
+/* ── tables ── */
+
+.c-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.c-table th {
+  padding: 0 10px 8px 0;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.c-table td {
+  padding: 8px 10px 8px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: baseline;
+}
+
+.c-table tr:last-child td {
+  border-bottom: none;
+}
+
+.c-table th.n,
+.c-table td.n {
+  text-align: right;
+  padding-right: 14px;
+  white-space: nowrap;
+}
+
+.c-table tfoot td {
+  border-top: 1px solid var(--border);
+  border-bottom: none;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.c-table tr.is-done td {
+  color: var(--muted);
+  opacity: 0.65;
+}
+
+.c-table tr.is-primary td {
+  color: var(--text);
+}
+
+.c-table tr.is-unknown td {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.c-why {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* Entity names should not wrap mid-name in dense tables. */
+.c-table td.c-name {
+  white-space: nowrap;
+  padding-right: 16px;
+}
+
+.c-pill {
+  margin-left: 7px;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--chip-bg);
+  border-radius: 3px;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+/* ── ore eta ── */
+
+.c-ore-eta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.c-ore-eta .c-fine {
+  margin: 0;
+}
+
+.c-ore-eta strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── definition list ── */
+
+.c-defs {
+  font-size: 13px;
+}
+
+.c-defs dt {
+  padding-top: 12px;
+  color: var(--text);
+}
+
+.c-defs dt.is-warn {
+  color: var(--bad);
+}
+
+.c-defs dd {
+  margin: 4px 0 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 64ch;
+}
+
+.c-defs dd:last-child {
+  border-bottom: none;
+}
+
+.c-defs strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── tier badges ── */
+
+.c-tierbadge {
+  display: inline-block;
+  min-width: 18px;
+  text-align: center;
+  font-size: 11px;
+  border-radius: 3px;
+  padding: 1px 5px;
+  background: var(--chip-bg);
+  color: var(--muted);
+}
+
+.c-tierbadge.is-S {
+  color: var(--ok);
+}
+
+.c-tierbadge.is-A {
+  color: var(--text);
+}
+
+.c-tierbadge.is-F {
+  color: var(--bad);
+}
+
+/* ── footer ── */
+
+.c-foot {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.c-foot code {
+  font-size: 11px;
+}
+
+/* ── responsive ── */
+
+@media (max-width: 640px) {
+  .c-wrap {
+    padding: 56px 20px 72px;
+  }
+
+  .c-title {
+    font-size: 27px;
+  }
+
+  .c-verdict-head {
+    font-size: 20px;
+  }
+
+  /* Indent the whole row via padding and float the number into it, so nothing
+     can extend past the container the way a margin on a 100%-basis child does. */
+  .c-row-main {
+    position: relative;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding-left: 34px;
+  }
+
+  .c-row-n {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: auto;
+  }
+
+  .c-row-name {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .c-row-move {
+    min-width: 0;
+    margin-left: auto;
+  }
+
+  .c-row-meta {
+    min-width: 0;
+    text-align: left;
+  }
+
+  /* Wide tables scroll inside themselves rather than the page. */
+  .c-section .c-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
