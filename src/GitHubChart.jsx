@@ -28,7 +28,12 @@ export function ChartGrid({ weeks, cellSize = 11, gap = 3, showTooltip = false, 
 
   const totalDays = weeks.reduce((sum, w) => sum + w.contributionDays.length, 0)
   const step = totalDays > 0 ? revealDuration / totalDays : 0
-  let dayIdx = 0
+  // Day index of the first day of each week, so the stagger delay is derived
+  // from position rather than a counter mutated during render.
+  const weekOffsets = weeks.reduce(
+    (acc, w) => [...acc, acc[acc.length - 1] + w.contributionDays.length],
+    [0]
+  )
 
   const onEnter = day => e => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -52,7 +57,7 @@ export function ChartGrid({ weeks, cellSize = 11, gap = 3, showTooltip = false, 
             {Array.from({ length: topPad }, (_, i) => (
               <div key={`tp${i}`} className="chart-day" data-level="0" />
             ))}
-            {days.map(day => {
+            {days.map((day, di) => {
               const dayProps = {
                 className: 'chart-day',
                 'data-level': level(day.contributionCount),
@@ -61,8 +66,7 @@ export function ChartGrid({ weeks, cellSize = 11, gap = 3, showTooltip = false, 
                 onMouseLeave: showTooltip ? onLeave : undefined,
               }
               if (animate) {
-                const delay = dayIdx * step
-                dayIdx += 1
+                const delay = (weekOffsets[wi] + di) * step
                 return (
                   <Motion.div
                     key={day.date}

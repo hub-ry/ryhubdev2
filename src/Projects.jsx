@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { motion as Motion } from 'framer-motion'
 
 export default function Projects() {
   const [repos, setRepos] = useState(null)
@@ -15,7 +15,7 @@ export default function Projects() {
 
   return (
     <section id="work" className="projects-section">
-      <motion.h2
+      <Motion.h2
         className="section-heading"
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -23,14 +23,14 @@ export default function Projects() {
         transition={{ duration: 0.4 }}
       >
         Work
-      </motion.h2>
+      </Motion.h2>
 
       {repos.length === 0 ? (
         <p className="projects-empty">Pin some repos on GitHub and they'll show up here.</p>
       ) : (
         <div className="projects-grid">
           {repos.map((repo, i) => (
-            <motion.a
+            <Motion.a
               key={repo.name}
               className="project-tile"
               href={repo.url}
@@ -55,7 +55,7 @@ export default function Projects() {
               {repo.description && (
                 <p className="project-desc">{repo.description}</p>
               )}
-            </motion.a>
+            </Motion.a>
           ))}
         </div>
       )}

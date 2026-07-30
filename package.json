@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node scripts/plan-smoke.mjs",
+    "gamedata": "node scripts/build-gamedata.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

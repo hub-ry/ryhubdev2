@@ -1,6 +1,16 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import Home from './Home'
 import Boring from './Boring'
+
+// /clash carries a bundled Clash of Clans dataset. Loading it lazily keeps the
+// landing page and resume from paying for it.
+const Clash = lazy(() => import('./clash/Clash.jsx'))
+
+const routeFor = (path) => {
+  if (path === '/resume' || path.startsWith('/resume/')) return 'resume'
+  if (path === '/clash' || path.startsWith('/clash/')) return 'clash'
+  return 'home'
+}
 
 function App() {
   const [dark, setDark] = useState(true)
@@ -9,10 +19,17 @@ function App() {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [dark])
 
-  const path = window.location.pathname
-  const isResume = path === '/resume' || path.startsWith('/resume/')
+  const route = routeFor(window.location.pathname)
 
-  return isResume ? <Boring dark={dark} setDark={setDark} /> : <Home />
+  if (route === 'resume') return <Boring dark={dark} setDark={setDark} />
+  if (route === 'clash') {
+    return (
+      <Suspense fallback={<div className="page" />}>
+        <Clash dark={dark} setDark={setDark} />
+      </Suspense>
+    )
+  }
+  return <Home />
 }
 
 export default App
