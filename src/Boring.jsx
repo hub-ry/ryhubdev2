@@ -15,21 +15,50 @@ const LINKS = [
   // { label: 'resume', href: '/hubbart_resume.pdf' },
 ]
 
+// Public page — deliberately only the internship. BoilerMake and Purdue Grand
+// Prix stay on the PDF resume only, since anyone can find this page.
 const EXPERIENCE = [
   {
     org: 'Lynco Products',
-    date: 'Summer 2026',
-    line: 'Full Stack Engineering Intern',
-    note: 'Current',
+    date: 'Jun – Aug 2026',
+    line: 'Full Stack Software Engineer Intern',
+    note: 'Shipped internal React tools, a multi-carrier shipping rate engine, and an in-house Debian dev server for a five-person team.',
   },
-
 ]
 
 const PROJECTS = [
-  { name: 'Open Source Event Ticketing System', href: '#', live: '', tags: ['Python'], desc: 'A SAAS project.' },  { name: 'Content Ranking Engine', href: '#', live: '', tags: ['C++'], desc: '' },
+  {
+    name: 'OpenTicket',
+    href: 'https://github.com/hub-ry/ticketing',
+    live: '',
+    tags: ['Python', 'FastAPI', 'Postgres'],
+    desc: 'Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops.',
+  },
+  {
+    name: 'Chrysalis',
+    href: 'https://github.com/hub-ry/chrysalis',
+    live: '',
+    tags: ['Agents', 'TypeScript'],
+    desc: "Assign work to coding agents, with a gate that won't let you merge what you can't explain.",
+  },
+  {
+    name: 'Self-Hosted Health Data Platform',
+    href: '',
+    live: '',
+    tags: ['Python', 'Svelte', 'Tailscale'],
+    desc: 'Time-series ingestion API and dashboard on a hardened Linux server, reachable only over a Tailscale network with nothing exposed to the public internet.',
+  },
+  {
+    name: 'Recommendation Engine',
+    href: '',
+    live: '',
+    wip: true,
+    tags: ['C++'],
+    desc: 'Vector search and ranking, built from the retrieval layer up.',
+  },
 ]
 
-const SKILLS = ['C++', 'C', 'Python', 'RestAPI', 'TypeScript', 'React', 'Docker', 'Linux', 'Git', 'PostgreSQL', 'Java', 'Assembly / ARM'
+const SKILLS = ['Python', 'C++', 'C', 'TypeScript', 'Java', 'SQL', 'FastAPI', 'PostgreSQL', 'Docker', 'Linux', 'React', 'Git'
 ]
 
 /* ───────────────────────────────────────────── */
@@ -88,9 +117,15 @@ export default function Boring({ dark, setDark }) {
             <div key={p.name} className="r-entry">
               <div className="r-entry-row">
                 <span className="r-proj-head">
-                  <a className="r-link" href={p.href} target="_blank" rel="noopener noreferrer">
-                    {p.name}
-                  </a>
+                  {/* No repo yet on work-in-progress entries — render plain text
+                      rather than an anchor that goes nowhere. */}
+                  {p.href ? (
+                    <a className="r-link" href={p.href} target="_blank" rel="noopener noreferrer">
+                      {p.name}
+                    </a>
+                  ) : (
+                    <span className="r-proj-name">{p.name}</span>
+                  )}
                   {p.live && (
                     <a className="r-live" href={p.live} target="_blank" rel="noopener noreferrer">
                       [live →]
@@ -98,6 +133,7 @@ export default function Boring({ dark, setDark }) {
                   )}
                 </span>
                 <span className="r-tags">
+                  {p.wip && <span className="r-tag r-tag--wip">in progress</span>}
                   {p.tags.map(t => (
                     <span key={t} className="r-tag">{t}</span>
                   ))}
