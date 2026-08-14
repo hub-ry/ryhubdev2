@@ -49,7 +49,7 @@ const PROJECTS = [
     desc: 'Time-series ingestion API and dashboard on a hardened Linux server, reachable only over a Tailscale network with nothing exposed to the public internet.',
   },
   {
-    name: 'Recommendation Engine',
+    name: 'Vector Search Engine',
     href: '',
     live: '',
     wip: true,
