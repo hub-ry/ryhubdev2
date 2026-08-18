@@ -35,11 +35,11 @@ const PROJECTS = [
     desc: 'Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops.',
   },
   {
-    name: 'Chrysalis',
-    href: 'https://github.com/hub-ry/chrysalis',
+    name: 'dum-intern - agentic programming environment',
+    href: 'https://github.com/hub-ry/dum-intern',
     live: '',
     tags: ['Agents', 'TypeScript'],
-    desc: "Assign work to coding agents, with a gate that won't let you merge what you can't explain.",
+    desc: "A coding agent that interrogates you about what you're asking for and won't build anything you can't explain.",
   },
   {
     name: 'Self-Hosted Health Data Platform',
