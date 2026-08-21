@@ -350,27 +350,18 @@ body {
 }
 
 .home-title {
-  /* Font is set inline by Home.jsx while the load animation runs. */
-  font-family: var(--font-serif);
-  /* These are display faces shipped at a single weight - asking for 600 would
-     make the browser synthesize a smeared fake bold. */
-  font-weight: 400;
+  /* It's a domain, so it's set in the same mono the rest of the site uses. */
+  font-family: var(--font-mono);
+  font-weight: 700;
   font-size: 32px;
-  letter-spacing: -1px;
+  /* No negative tracking - it fights the fixed advance width of a mono face. */
+  letter-spacing: normal;
   color: var(--text);
-  /* Each face has different metrics; a fixed line box keeps the photo below
-     from jumping on every flip. */
   line-height: 1.2;
   min-height: 39px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 220ms ease;
-  opacity: 0.85;
-}
-
-.home-title.is-settled {
-  opacity: 1;
 }
 
 .home-gallery {
