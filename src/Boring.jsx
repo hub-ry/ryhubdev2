@@ -34,9 +34,8 @@ const PROJECTS = [
     // the repo would publish the weaknesses along with the design.
     href: '',
     live: '',
-    ask: "can't be open sourced - ask me why",
     tags: ['Python', 'FastAPI', 'SQLite'],
-    desc: 'Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops.',
+    desc: "Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops. I can't open source this because of security reasons, but please ask me about this if you're interested.",
   },
   {
     name: 'dum-intern - agentic programming environment',
@@ -135,7 +134,6 @@ export default function Boring({ dark, setDark }) {
                       [live →]
                     </a>
                   )}
-                  {p.ask && <span className="r-ask">[{p.ask}]</span>}
                 </span>
                 <span className="r-tags">
                   {p.wip && <span className="r-tag r-tag--wip">in progress</span>}
