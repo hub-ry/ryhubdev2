@@ -28,7 +28,7 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-    name: 'OpenTicket',
+    name: 'Event Ticketing Platform',
     href: 'https://github.com/hub-ry/ticketing',
     live: '',
     tags: ['Python', 'FastAPI', 'Postgres'],
