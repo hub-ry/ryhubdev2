@@ -34,7 +34,7 @@ const PROJECTS = [
     // the repo would publish the weaknesses along with the design.
     href: '',
     live: '',
-    ask: true,
+    ask: "can't be open sourced - ask me why",
     tags: ['Python', 'FastAPI', 'SQLite'],
     desc: 'Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops.',
   },
@@ -135,7 +135,7 @@ export default function Boring({ dark, setDark }) {
                       [live →]
                     </a>
                   )}
-                  {p.ask && <span className="r-ask">[ask me about this]</span>}
+                  {p.ask && <span className="r-ask">[{p.ask}]</span>}
                 </span>
                 <span className="r-tags">
                   {p.wip && <span className="r-tag r-tag--wip">in progress</span>}
