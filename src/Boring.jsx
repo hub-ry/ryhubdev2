@@ -36,7 +36,7 @@ const PROJECTS = [
     live: '',
     tags: ['Python', 'FastAPI', 'SQLite'],
     desc: 'Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops.',
-    note: "I can't open source this because of security reasons, but please ask me about this if you're interested.",
+    note: "not open source for security, but please ask if you're interested",
   },
   {
     name: 'dum-intern - agentic programming environment',
