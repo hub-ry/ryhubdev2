@@ -276,6 +276,14 @@ body {
   color: var(--text);
 }
 
+/* Stands in for the repo link on projects whose source is deliberately
+   private. Reads as an invitation, not a dead link, so it is plain text. */
+.r-ask {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+}
+
 .r-tags {
   flex-shrink: 0;
   display: flex;

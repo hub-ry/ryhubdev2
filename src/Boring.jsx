@@ -29,9 +29,13 @@ const EXPERIENCE = [
 const PROJECTS = [
   {
     name: 'Event Ticketing Platform',
-    href: 'https://github.com/hub-ry/ticketing',
+    // Source stays private: the README documents real attack surface (a scan
+    // only marks the ticket used at the station that scanned it), so linking
+    // the repo would publish the weaknesses along with the design.
+    href: '',
     live: '',
-    tags: ['Python', 'FastAPI', 'Postgres'],
+    ask: true,
+    tags: ['Python', 'FastAPI', 'SQLite'],
     desc: 'Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops.',
   },
   {
@@ -131,6 +135,7 @@ export default function Boring({ dark, setDark }) {
                       [live →]
                     </a>
                   )}
+                  {p.ask && <span className="r-ask">[ask me about this]</span>}
                 </span>
                 <span className="r-tags">
                   {p.wip && <span className="r-tag r-tag--wip">in progress</span>}
