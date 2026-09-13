@@ -20,6 +20,16 @@ const QUERIES = {
       }
     }
   }`,
+  stars: `{
+    user(login: "${USERNAME}") {
+      repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
+        nodes {
+          nameWithOwner
+          stargazerCount
+        }
+      }
+    }
+  }`,
   projects: `{
     user(login: "${USERNAME}") {
       pinnedItems(first: 6, types: REPOSITORY) {

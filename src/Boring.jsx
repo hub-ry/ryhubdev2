@@ -1,5 +1,6 @@
 import GitHubChart from './GitHubChart'
 import { useContributions } from './useContributions'
+import { useStars } from './useStars'
 import ThemeToggle from './ThemeToggle'
 
 /* ─────────────────────────────────────────────
@@ -67,6 +68,24 @@ const SKILLS = ['Python', 'C++', 'C', 'TypeScript', 'Java', 'SQL', 'FastAPI', 'P
 
 /* ───────────────────────────────────────────── */
 
+// "owner/name" from a github.com project link, so a project can look up its
+// own star count.
+function repoKey(href) {
+  const m = href?.match(/github\.com\/([^/]+\/[^/?#]+)/)
+  return m ? m[1] : null
+}
+
+function Stars({ count }) {
+  return (
+    <span className="r-stars" title={`${count} star${count === 1 ? '' : 's'} on GitHub`}>
+      <svg className="r-star-icon" viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M8 .8l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5L.8 6.1l5-.7z" />
+      </svg>
+      {count}
+    </span>
+  )
+}
+
 function Section({ label, children }) {
   return (
     <section className="r-section">
@@ -78,6 +97,7 @@ function Section({ label, children }) {
 
 export default function Boring({ dark, setDark }) {
   const { calendar, loading } = useContributions()
+  const stars = useStars()
 
   return (
     <div className="page">
@@ -130,6 +150,9 @@ export default function Boring({ dark, setDark }) {
                   ) : (
                     <span className="r-proj-name">{p.name}</span>
                   )}
+                  {/* Only once a repo actually has stars - a "0" next to a
+                      project reads worse than no counter at all. */}
+                  {stars[repoKey(p.href)] > 0 && <Stars count={stars[repoKey(p.href)]} />}
                   {p.live && (
                     <a className="r-live" href={p.live} target="_blank" rel="noopener noreferrer">
                       [live →]
