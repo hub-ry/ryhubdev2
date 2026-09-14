@@ -66,7 +66,7 @@ const PROJECTS = [
     live: '',
     wip: true,
     tags: ['C++'],
-    desc: 'Cosine ranking over unit vectors, written in C++ from scratch. Brute force today and deliberately so, because the interesting part is what comes next: SIMD scoring, a cache-friendly layout, and an approximate index, measuring what each speedup costs in recall.',
+    desc: 'Search here is ranking, not found-or-not-found: every vector gets a similarity score and the best ones come back. Brute force scores all of them, which is exact but slow. Everything faster works by skipping candidates, so the project is really about that trade: how much speed you can buy before the results stop being the right ones.',
   },
 ]
 
