@@ -29,13 +29,6 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-    name: 'Swatch - clothing recommender',
-    href: 'https://github.com/hub-ry/phackers-hacknight1',
-    live: 'https://swatch.ryhub.dev',
-    tags: ['Python', 'NumPy', 'CLIP'],
-    desc: 'Swipe on clothes, it learns your taste. CLIP embeddings over 1,762 scraped items, with taste modelled as several clusters instead of one average so two different styles stay two different styles.',
-  },
-  {
     name: 'Event Ticketing Platform',
     // Source stays private: the README documents real attack surface (a scan
     // only marks the ticket used at the station that scanned it), so linking
@@ -54,6 +47,13 @@ const PROJECTS = [
     desc: "A coding agent that interrogates you about what you're asking for and won't build anything you can't explain.",
   },
   {
+    name: 'Swatch - clothing recommender',
+    href: 'https://github.com/hub-ry/phackers-hacknight1',
+    live: 'https://swatch.ryhub.dev',
+    tags: ['Python', 'NumPy', 'CLIP'],
+    desc: 'Swipe on clothes, it learns your taste. CLIP embeddings over 1,762 scraped items, with taste modelled as several clusters instead of one average so two different styles stay two different styles.',
+  },
+  {
     name: 'Self-Hosted Health Data Platform',
     href: '',
     live: '',
@@ -66,7 +66,7 @@ const PROJECTS = [
     live: '',
     wip: true,
     tags: ['C++'],
-    desc: 'Vector search and ranking, built from the retrieval layer up.',
+    desc: 'Cosine ranking over unit vectors, written in C++ from scratch. Brute force today and deliberately so, because the interesting part is what comes next: SIMD scoring, a cache-friendly layout, and an approximate index, measuring what each speedup costs in recall.',
   },
 ]
 
