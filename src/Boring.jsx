@@ -29,6 +29,13 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
+    name: 'Swatch - clothing recommender',
+    href: 'https://github.com/hub-ry/phackers-hacknight1',
+    live: 'https://swatch.ryhub.dev',
+    tags: ['Python', 'NumPy', 'CLIP'],
+    desc: 'Swipe on clothes, it learns your taste. CLIP embeddings over 1,762 scraped items, with taste modelled as several clusters instead of one average so two different styles stay two different styles.',
+  },
+  {
     name: 'Event Ticketing Platform',
     // Source stays private: the README documents real attack surface (a scan
     // only marks the ticket used at the station that scanned it), so linking
