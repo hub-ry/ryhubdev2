@@ -66,7 +66,6 @@ const PROJECTS = [
     live: '',
     wip: true,
     tags: ['C++'],
-    desc: 'Search here is ranking, not found-or-not-found: every vector gets a similarity score and the best ones come back. Brute force scores all of them, which is exact but slow. Everything faster works by skipping candidates, so the project is really about that trade: how much speed you can buy before the results stop being the right ones.',
   },
 ]
 
@@ -177,7 +176,7 @@ export default function Boring({ dark, setDark }) {
                   ))}
                 </span>
               </div>
-              <p className="r-entry-line">{p.desc}</p>
+              {p.desc && <p className="r-entry-line">{p.desc}</p>}
               {p.note && <p className="r-entry-note">{p.note}</p>}
             </div>
           ))}
