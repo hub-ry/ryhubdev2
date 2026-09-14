@@ -148,10 +148,12 @@ export default function Boring({ dark, setDark }) {
             <div key={p.name} className="r-entry">
               <div className="r-entry-row">
                 <span className="r-proj-head">
-                  {/* No repo yet on work-in-progress entries — render plain text
+                  {/* The title goes to whatever best shows the project: the
+                      running site if there is one, otherwise the repo. Entries
+                      with neither are work in progress, so render plain text
                       rather than an anchor that goes nowhere. */}
-                  {p.href ? (
-                    <a className="r-link" href={p.href} target="_blank" rel="noopener noreferrer">
+                  {(p.live || p.href) ? (
+                    <a className="r-link" href={p.live || p.href} target="_blank" rel="noopener noreferrer">
                       {p.name}
                     </a>
                   ) : (
@@ -160,9 +162,11 @@ export default function Boring({ dark, setDark }) {
                   {/* Only once a repo actually has stars - a "0" next to a
                       project reads worse than no counter at all. */}
                   {stars[repoKey(p.href)] > 0 && <Stars count={stars[repoKey(p.href)]} />}
-                  {p.live && (
-                    <a className="r-live" href={p.live} target="_blank" rel="noopener noreferrer">
-                      [live →]
+                  {/* Only when the title took the live link, so the repo still
+                      has somewhere to be. */}
+                  {p.live && p.href && (
+                    <a className="r-side" href={p.href} target="_blank" rel="noopener noreferrer">
+                      [source →]
                     </a>
                   )}
                 </span>
