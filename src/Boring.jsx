@@ -125,9 +125,9 @@ export default function Boring({ dark, setDark }) {
           </div>
         </header>
 
-        <Section label="About">
+        <section className="r-section">
           <GitHubChart calendar={calendar} loading={loading} cellSize={8} gap={3} />
-        </Section>
+        </section>
 
         <Section label="Experience">
           {EXPERIENCE.map(e => (
