@@ -40,6 +40,15 @@ export default function Home() {
         <a className="home-link" href="/resume">
           ryhub.dev/resume
         </a>
+
+        <a
+          className="home-link"
+          href="https://substack.com/@ryanlearnspanish"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          substack.com/@ryanlearnspanish
+        </a>
       </div>
     </div>
   )

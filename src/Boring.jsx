@@ -12,8 +12,7 @@ const ROLE = 'Computer Science @ Purdue'
 const TAGLINES = ['Systems + Automation', 'Graduating Spring 2028']
 
 const LINKS = [
-  { label: 'github.com/hub-ry', href: 'https://github.com/hub-ry' },
-  { label: 'substack.com/@ryanlearnspanish', href: 'https://substack.com/@ryanlearnspanish' }
+  { label: 'github.com/hub-ry', href: 'https://github.com/hub-ry' }
   // { label: 'resume', href: '/hubbart_resume.pdf' },
 ]
 
