@@ -47,13 +47,6 @@ const PROJECTS = [
     desc: "A coding agent that interrogates you about what you're asking for and won't build anything you can't explain.",
   },
   {
-    name: 'feynman-slides - critic-checked study slides',
-    href: 'https://github.com/hub-ry/feynman-slides',
-    live: 'https://feyn.ryhub.dev',
-    tags: ['TypeScript', 'Agents'],
-    desc: 'You write slides to teach yourself a topic, and a critic reads each one as you write it. The deck will not export while a slide says something false or names a concept where it should explain the mechanism.',
-  },
-  {
     name: 'Swatch - clothing recommender',
     href: 'https://github.com/hub-ry/phackers-hacknight1',
     live: 'https://swatch.ryhub.dev',

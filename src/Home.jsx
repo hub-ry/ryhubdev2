@@ -40,6 +40,10 @@ export default function Home() {
         <a className="home-link" href="/resume">
           ryhub.dev/resume
         </a>
+
+        <a className="home-link" href="https://feyn.ryhub.dev">
+          notes
+        </a>
       </div>
     </div>
   )
