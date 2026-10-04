@@ -541,26 +541,6 @@ export function InProgress({ village }) {
   )
 }
 
-/**
- * Paste a fresh export. Offered at the top and again at the bottom, since a
- * snapshot goes stale the moment anything finishes and the plan is long enough
- * that scrolling back up to a small link is a nuisance.
- */
-export function NewExport({ onReset, takenAt }) {
-  return (
-    <div className="c-newexport">
-      <button className="c-btn is-big" onClick={onReset}>
-        paste a new export
-      </button>
-      <span className="c-fine">
-        {takenAt
-          ? `This plan is from a snapshot taken ${ago(takenAt)}. Re-export from the game for current timers.`
-          : 'Re-export from the game whenever you want current timers.'}
-      </span>
-    </div>
-  )
-}
-
 export function Meta({ village, plan, source }) {
   return (
     <div className="c-meta">

@@ -16,7 +16,6 @@ import {
   Defenses,
   InProgress,
   Meta,
-  NewExport,
 } from './Sections.jsx'
 import ThemeToggle from '../ThemeToggle.jsx'
 import './clash.css'
@@ -25,33 +24,12 @@ const STORAGE_KEY = 'clash:export'
 
 function Paste({ onSubmit, error }) {
   const [text, setText] = useState('')
-
-  const readClipboard = async () => {
-    try {
-      const t = await navigator.clipboard.readText()
-      setText(t)
-      onSubmit(t)
-    } catch {
-      // Clipboard permission denied - the textarea is the fallback.
-    }
-  }
-
   return (
-    <div className="c-paste">
-      <ol className="c-how">
-        <li>In game, open Settings (the gear).</li>
-        <li>
-          Tap <em>More Settings</em>.
-        </li>
-        <li>
-          Under <em>Data export</em>, tap <em>Copy</em>.
-        </li>
-        <li>Paste it here.</li>
-      </ol>
-
+    <div className="s-paste">
       <textarea
-        className="c-input"
+        className="s-input"
         value={text}
+        autoFocus
         onChange={(e) => setText(e.target.value)}
         onPaste={(e) => {
           const t = e.clipboardData.getData('text')
@@ -61,30 +39,39 @@ function Paste({ onSubmit, error }) {
             onSubmit(t)
           }
         }}
-        placeholder={'{"tag":"#...","timestamp":...,"buildings":[...]}'}
+        placeholder="paste your village export"
         spellCheck="false"
-        rows={6}
+        rows={4}
       />
-
-      {error ? <p className="c-error">{error}</p> : null}
-
-      <div className="c-actions">
-        <button className="c-btn" onClick={() => onSubmit(text)} disabled={!text.trim()}>
-          read my village
+      {error ? <p className="s-error">{error}</p> : null}
+      <p className="s-fine">
+        Settings → More Settings → Data export → Copy.{' '}
+        <button className="s-link" onClick={() => onSubmit(JSON.stringify(sample))}>
+          try a sample
         </button>
-        <button className="c-btn is-quiet" onClick={readClipboard}>
-          paste from clipboard
-        </button>
-        <button className="c-btn is-quiet" onClick={() => onSubmit(JSON.stringify(sample))}>
-          use a sample
-        </button>
-      </div>
-
-      <p className="c-fine">
-        Everything runs in this browser. The JSON is kept in local storage on this device and is
-        never uploaded.
       </p>
     </div>
+  )
+}
+
+function Todo({ plan }) {
+  const next = plan.queue.slice(0, 8)
+  return (
+    <>
+      <p className="s-headline">{plan.verdict.headline}</p>
+      {next.length ? (
+        <ol className="s-list">
+          {next.map((q, i) => (
+            <li key={`${q.kind}-${q.dataId}-${i}`}>
+              {q.entity.name}{' '}
+              <span className="s-muted">
+                {q.kind === 'place' ? `place${q.count > 1 ? ` × ${q.count}` : ''}` : `${q.from} → ${q.to}`}
+              </span>
+            </li>
+          ))}
+        </ol>
+      ) : null}
+    </>
   )
 }
 
@@ -97,6 +84,7 @@ export default function Clash({ dark, setDark }) {
     }
   })
   const [error, setError] = useState(null)
+  const [why, setWhy] = useState(false)
 
   useEffect(() => {
     document.title = 'ryhub.dev/clash'
@@ -131,6 +119,7 @@ export default function Clash({ dark, setDark }) {
 
   const reset = () => {
     setRaw('')
+    setWhy(false)
     setError(null)
     try {
       localStorage.removeItem(STORAGE_KEY)
@@ -146,23 +135,17 @@ export default function Clash({ dark, setDark }) {
       </a>
       <ThemeToggle dark={dark} setDark={setDark} />
 
-      <div className="c-wrap">
-        <header className="c-head">
-          <h1 className="c-title">clash</h1>
-          <p className="c-sub">
-            Paste your village export. Get the upgrade order a strategic rush actually calls for.
-          </p>
-        </header>
+      <main className={why ? 'c-wrap' : 's-wrap'}>
+        <h1 className="s-title">clash</h1>
 
         {!plan || plan.fatal ? (
           <>
-            {plan?.fatal ? <p className="c-error">{plan.fatal}</p> : null}
+            {plan?.fatal ? <p className="s-error">{plan.fatal}</p> : null}
             <Paste onSubmit={submit} error={error} />
           </>
-        ) : (
+        ) : why ? (
           <>
             <Meta village={plan.village} plan={plan} source={gamedata.source} />
-            <NewExport onReset={reset} takenAt={plan.village.takenAt} />
             <Verdict verdict={plan.verdict} />
             <Flags alerts={plan.alerts} verdict={plan.verdict} />
             <Queue queue={plan.queue} />
@@ -174,18 +157,31 @@ export default function Clash({ dark, setDark }) {
             <Lab lab={plan.lab} />
             <MagicItems magic={plan.magic} />
             <Defenses village={plan.village} plan={plan} />
-            <NewExport onReset={reset} takenAt={plan.village.takenAt} />
+            <p className="s-fine">
+              Priorities follow CallMeTee&rsquo;s Strategic Rush Bible, v1.6.4. Game numbers from{' '}
+              <code>{gamedata.source}</code>, generated {gamedata.generatedAt}. Not affiliated with
+              Supercell.
+            </p>
+            <nav className="s-foot">
+              <button className="s-link" onClick={() => setWhy(false)}>
+                back
+              </button>
+            </nav>
+          </>
+        ) : (
+          <>
+            <Todo plan={plan} />
+            <nav className="s-foot">
+              <button className="s-link" onClick={() => setWhy(true)}>
+                why
+              </button>
+              <button className="s-link" onClick={reset}>
+                new export
+              </button>
+            </nav>
           </>
         )}
-
-        <footer className="c-foot">
-          <p>
-            Priorities follow CallMeTee&rsquo;s Strategic Rush Bible, v1.6.4. Game numbers from{' '}
-            <code>{gamedata.source}</code>, generated {gamedata.generatedAt}. Not affiliated with
-            Supercell.
-          </p>
-        </footer>
-      </div>
+      </main>
     </div>
   )
 }
