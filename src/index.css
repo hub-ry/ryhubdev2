@@ -401,6 +401,7 @@ body {
   margin: 6px 0;
   overflow: hidden;
   border: 1px solid var(--border);
+  border-radius: 12px;
 }
 
 .home-photo {
