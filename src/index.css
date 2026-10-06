@@ -352,75 +352,215 @@ body {
 }
 
 /* ── Home ── */
+/* The landing page borrows dum's public-site look (dum-intern/src/site):
+   Rose Pine Moon, Hack, a thin bordered nav, small type, lots of open space. */
+
+@font-face {
+  font-family: 'Hack';
+  src: url('/fonts/hack-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('/fonts/hack-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 .home {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  --rp-base: #232136;
+  --rp-overlay: #393552;
+  --rp-muted: #6e6a86;
+  --rp-subtle: #908caa;
+  --rp-text: #e0def4;
+  --rp-iris: #c4a7e7;
+  --rp-pine: #3e8fb0;
+  --rp-foam: #9ccfd8;
+
   min-height: 100svh;
-  padding: 24px;
+  background: var(--rp-base);
+  color: var(--rp-text);
+  font-family: 'Hack', var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
 }
 
-.home-inner {
+/* The home page has no theme toggle; keep overscroll and the gutter on its base. */
+html.is-home,
+html.is-home body {
+  background: #232136;
+}
+
+.home-nav {
+  position: relative;
+  z-index: 2;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 0.65rem 1.8rem;
+  border-bottom: 1px solid var(--rp-overlay);
+  background: var(--rp-base);
 }
 
-.home-title {
-  /* It's a domain, so it's set in the same mono the rest of the site uses. */
-  font-family: var(--font-mono);
+.home-logo {
+  color: var(--rp-iris);
   font-weight: 700;
-  font-size: 32px;
-  /* No negative tracking - it fights the fixed advance width of a mono face. */
-  letter-spacing: normal;
-  color: var(--text);
-  line-height: 1.2;
-  min-height: 39px;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+.home-logo:hover {
+  color: var(--rp-text);
+}
+
+.home-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.4rem;
+}
+
+.home-nav-links a {
+  color: var(--rp-subtle);
+  text-decoration: none;
+}
+
+.home-nav-links a:hover {
+  color: var(--rp-text);
+}
+
+.home a:focus-visible {
+  outline: 1px solid var(--rp-pine);
+  outline-offset: 2px;
+}
+
+.home-cover {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 70vh;
+  min-height: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-bottom: 1px solid var(--rp-overlay);
+}
+
+/* The same photo, blown up and frosted, so the cover takes on its night blue. */
+.home-cover-frost {
+  position: absolute;
+  inset: -60px;
+  z-index: -2;
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  object-fit: cover;
+  /* Frame the sky and towers; the lamp-lit snow lower down left a warm smudge. */
+  object-position: 50% 22%;
+  filter: blur(48px) saturate(1.6) brightness(1.7);
+}
+
+/* Tint toward the Rose Pine base so the edges melt into the nav and page. */
+.home-cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(156, 207, 216, 0.06), rgba(35, 33, 54, 0.7) 80%),
+    rgba(68, 65, 90, 0.22);
+}
+
+.home-cover-inner {
+  display: flex;
+  align-items: center;
+  gap: 3.2rem;
+  padding: 2rem 1.8rem;
 }
 
 .home-gallery {
-  position: relative;
-  width: 250px;
-  height: 330px;
-  margin: 6px 0;
-  border-radius: 12px;
+  flex-shrink: 0;
+  width: 220px;
+  height: 290px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--chip-bg);
+  border: 1px solid rgba(224, 222, 244, 0.14);
+  box-shadow: 0 24px 60px -20px rgba(10, 9, 20, 0.7);
 }
 
 .home-photo {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 1.1s ease;
 }
 
-.home-photo.is-active {
-  opacity: 1;
+.home-quote {
+  color: var(--rp-subtle);
+  font-size: 12px;
+  line-height: 2;
+  letter-spacing: 0.06em;
+  white-space: pre;
 }
 
-.home-link {
-  font-size: 14px;
-  color: var(--muted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
-  text-decoration-color: var(--border);
-  transition: color 0.15s, text-decoration-color 0.15s;
+.home-quote span {
+  display: block;
 }
 
-.home-link:hover {
-  color: var(--text);
-  text-decoration-color: var(--muted);
+.home-quote span:first-child {
+  color: var(--rp-text);
+  margin-bottom: 0.6rem;
+}
+
+/* A terminal cursor that shows up once the quote has finished decoding. */
+.home-quote.is-done span:last-child::after {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: 0.4em;
+  vertical-align: -0.2em;
+  background: var(--rp-iris);
+  animation: home-blink 1.1s steps(1) infinite;
+}
+
+@keyframes home-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-quote.is-done span:last-child::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-nav {
+    padding: 0.6rem 1rem;
+  }
+
+  .home-cover {
+    height: auto;
+    min-height: 70svh;
+  }
+
+  .home-cover-inner {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2.4rem 1rem;
+  }
+
+  .home-gallery {
+    width: 180px;
+    height: 238px;
+  }
+
+  .home-quote {
+    font-size: 11px;
+    text-align: center;
+  }
 }
 
 /* ── Back to home ── */
