@@ -20,12 +20,6 @@ export default function Home() {
           <a href="/resume">ryhub.dev/resume</a>
         </nav>
       </main>
-
-      <blockquote className="home-quote">
-        <p>llms code well because we&rsquo;ve been implementing</p>
-        <p>the same three apps and websites for the last three decades.</p>
-        <cite className="home-quote-cite">- some person on reddit</cite>
-      </blockquote>
     </div>
   )
 }
