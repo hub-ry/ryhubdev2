@@ -441,8 +441,6 @@ body {
 .home-quote {
   max-width: 62ch;
   margin: 48px auto 8px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 12px;
   line-height: 1.9;
