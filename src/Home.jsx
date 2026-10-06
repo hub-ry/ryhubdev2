@@ -5,8 +5,6 @@ const PHOTO = { src: '/photos/purdue_snow.jpg', alt: 'Snowy Purdue campus at nig
 export default function Home() {
   useEffect(() => {
     document.title = 'ryhub.dev'
-    document.documentElement.classList.add('is-home')
-    return () => document.documentElement.classList.remove('is-home')
   }, [])
 
   return (
