@@ -12,7 +12,8 @@ const ROLE = 'Computer Science @ Purdue'
 const TAGLINES = ['Systems + Interactive Software', 'Graduating Spring 2028']
 
 const LINKS = [
-  { label: 'github.com/hub-ry', href: 'https://github.com/hub-ry' }
+  { label: 'github.com/hub-ry', href: 'https://github.com/hub-ry' },
+  { label: 'linkedin.com/in/ryanhubbart', href: 'https://www.linkedin.com/in/ryanhubbart/' },
   // { label: 'resume', href: '/hubbart_resume.pdf' },
 ]
 
