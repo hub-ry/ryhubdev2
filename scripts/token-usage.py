@@ -73,10 +73,13 @@ class Collector:
                 self.records[key] = (date, provider, total, cached)
 
     def collect(self):
+        day_start = datetime.now(ZONE).replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
         for source, root in ROOTS:
             for path in (self.home / root).rglob('*.jsonl'):
                 try:
                     stat = path.stat()
+                    if stat.st_mtime < day_start:
+                        continue
                     state = self.files.setdefault(str(path), {'offset': 0, 'inode': stat.st_ino})
                     if stat.st_ino != state['inode'] or stat.st_size < state['offset']:
                         state.clear()
