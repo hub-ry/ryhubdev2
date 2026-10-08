@@ -35,7 +35,7 @@ const SETUP = [
   {
     label: 'models',
     tools: [
-      { name: 'Claude Code', href: 'https://claude.com/product/claude-code', note: 'Opus 5.5 writes the code (Max plan)' },
+      { name: 'Claude Code', href: 'https://claude.com/product/claude-code', note: 'Opus 5.5 High writes the code (Max plan)' },
       { name: 'Codex', href: 'https://github.com/openai/codex', note: 'I try to review with GPT 5.6 Sol (free for students)' },
       { name: 'Antigravity', href: 'https://antigravity.google', note: 'comes with the Gemini plan' },
     ],
@@ -52,8 +52,8 @@ const SETUP = [
 ]
 
 const PROJECTS = [
-  { name: 'dum-intern', href: 'https://github.com/hub-ry/dum-intern', line: 'a coding agent that makes you explain what you ask for' },
-  { name: 'swatch', href: 'https://swatch.ryhub.dev', line: 'swipe on clothes, it learns your taste' },
+  { name: 'dum-intern', href: 'https://github.com/hub-ry/dum-intern', line: 'Electron macOS companion with zone-based context, a global skill tree and skill-gated file edits.' },
+  { name: 'swatch', href: 'https://swatch.ryhub.dev', line: 'Python/FastAPI recommender using image embeddings, multiple taste clusters and batch ranking with brand and garment-type limits.' },
 ]
 
 /* ───────────────────────────────────────────── */

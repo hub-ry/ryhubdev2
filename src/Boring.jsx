@@ -9,7 +9,7 @@ import ThemeToggle from './ThemeToggle'
 
 const NAME = 'Ryan Hubbart'
 const ROLE = 'Computer Science @ Purdue'
-const TAGLINES = ['Systems + Automation', 'Graduating Spring 2028']
+const TAGLINES = ['Systems + Interactive Software', 'Graduating Spring 2028']
 
 const LINKS = [
   { label: 'github.com/hub-ry', href: 'https://github.com/hub-ry' }
@@ -23,49 +23,49 @@ const EXPERIENCE = [
     org: 'Lynco Products',
     date: 'Jun – Aug 2026',
     line: 'Full Stack Software Engineer Intern',
-    note: 'Shipped internal React tools, a multi-carrier shipping rate engine, and an in-house Debian dev server for a five-person team.',
+    note: 'Built internal React tools, a multi-carrier shipping rate engine, and a Debian development server for a five-person team.',
   },
 ]
 
 const PROJECTS = [
   {
-    name: 'Event Ticketing Platform',
+    name: 'OpenTicket - event ticketing',
     // Source stays private: the README documents real attack surface (a scan
     // only marks the ticket used at the station that scanned it), so linking
     // the repo would publish the weaknesses along with the design.
     href: '',
     live: '',
-    tags: ['Python', 'FastAPI', 'SQLite'],
-    desc: 'Offline-first event ticketing. Ed25519-signed tickets verify on-device, so the gate keeps admitting people when the network drops.',
-    note: "not open source for security, but please ask if you're interested",
+    tags: ['Python', 'FastAPI', 'PostgreSQL'],
+    desc: 'FastAPI backend with Stripe checkout and Ed25519-signed QR tickets. A scanner PWA verifies tickets locally after its initial load and syncs scans when connectivity returns.',
+    note: 'Private source; implementation details available on request.',
   },
   {
-    name: 'dum-intern - agentic programming environment',
+    name: 'dum-intern - macOS learning companion',
     href: 'https://github.com/hub-ry/dum-intern',
     live: '',
-    tags: ['Agents', 'TypeScript'],
-    desc: "A coding agent that interrogates you about what you're asking for and won't build anything you can't explain.",
+    tags: ['TypeScript', 'Electron', 'Node.js'],
+    desc: 'Electron app with zone-based learning context and a global skill tree that controls which code it may write. File edits are restricted to shared paths, checked against the last-read hash, and stored with a diff and revert action.',
   },
   {
     name: 'Swatch - clothing recommender',
-    href: 'https://github.com/hub-ry/phackers-hacknight1',
+    href: '',
     live: 'https://swatch.ryhub.dev',
-    tags: ['Python', 'NumPy', 'CLIP'],
-    desc: 'Swipe on clothes, it learns your taste. CLIP embeddings over 1,762 scraped items, with taste modelled as several clusters instead of one average so two different styles stay two different styles.',
+    tags: ['Python', 'NumPy', 'FastAPI'],
+    desc: 'Clothing recommendation API using mean-centered image embeddings and separate taste clusters. Ranks batches with limits on repeated brands and garment types; FastAPI serves the swipe quiz and recommendations.',
   },
   {
     name: 'Self-Hosted Health Data Platform',
     href: '',
     live: '',
     tags: ['Python', 'Svelte', 'Tailscale'],
-    desc: 'Time-series ingestion API and dashboard on a hardened Linux server, reachable only over a Tailscale network with nothing exposed to the public internet.',
+    desc: 'Python ingestion API and Svelte dashboard for time-series health data. Runs on Linux with access restricted to a private Tailscale network.',
   },
 ]
 
 const SKILLS = [
-  'TypeScript', 'Python', 'C++', 'C', 'Rust', 'Java', 'SQL',
-  'React', 'Electron', 'Node.js', 'FastAPI', 'SQLite', 'PostgreSQL',
-  'Docker', 'Linux', 'Git',
+  'C++', 'C', 'Rust', 'Python', 'TypeScript',
+  'Linux', 'Git', 'React', 'Electron', 'Node.js',
+  'SQL', 'PostgreSQL', 'SQLite', 'FastAPI', 'Docker', 'Java',
 ]
 
 /* ───────────────────────────────────────────── */
