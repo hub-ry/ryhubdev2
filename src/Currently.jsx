@@ -146,7 +146,6 @@ export default function Currently({ dark, setDark }) {
       <main className="resume">
         <header className="r-header">
           <h1 className="r-name">Currently</h1>
-          <p className="r-tagline">what I'm using, playing and building</p>
         </header>
 
         <div className="cur-cards">
