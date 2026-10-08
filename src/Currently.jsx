@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNowPlaying } from './useNowPlaying'
 import ThemeToggle from './ThemeToggle'
+import TokenBurn from './TokenBurn'
 
 /* ─────────────────────────────────────────────
    Edit everything below to update the /currently page.
@@ -52,7 +53,6 @@ const SETUP = [
 
 const PROJECTS = [
   { name: 'dum-intern', href: 'https://github.com/hub-ry/dum-intern', line: 'a coding agent that makes you explain what you ask for' },
-  { name: 'feynman-slides', href: 'https://feyn.ryhub.dev', line: 'write slides to learn a topic, a critic checks each one - being rebuilt as a dum-intern magnet project' },
   { name: 'swatch', href: 'https://swatch.ryhub.dev', line: 'swipe on clothes, it learns your taste' },
 ]
 
@@ -168,6 +168,7 @@ export default function Currently({ dark, setDark }) {
                 </div>
               ))}
             </dl>
+            <TokenBurn />
             <p className="cur-credit">
               inspired by{' '}
               <a className="r-link" href={INSPIRATION.href} target="_blank" rel="noopener noreferrer">
@@ -186,6 +187,10 @@ export default function Currently({ dark, setDark }) {
             ))}
           </Card>
         </div>
+        <p className="cur-notes">
+          <a className="r-link" href="https://feyn.ryhub.dev" target="_blank" rel="noopener noreferrer">notes</a>
+          {' '}<span className="cur-quiet">- teaching slides from Feynman Slides</span>
+        </p>
       </main>
 
       <ThemeToggle dark={dark} setDark={setDark} />

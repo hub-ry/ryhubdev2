@@ -466,6 +466,19 @@ body {
   margin-top: 4px;
 }
 
+.cur-token-burn {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cur-notes {
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
 .cur-credit {
   margin-top: 18px;
   padding-top: 14px;
