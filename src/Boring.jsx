@@ -60,16 +60,12 @@ const PROJECTS = [
     tags: ['Python', 'Svelte', 'Tailscale'],
     desc: 'Time-series ingestion API and dashboard on a hardened Linux server, reachable only over a Tailscale network with nothing exposed to the public internet.',
   },
-  {
-    name: 'Vector Search Engine',
-    href: '',
-    live: '',
-    wip: true,
-    tags: ['C++'],
-  },
 ]
 
-const SKILLS = ['Python', 'C++', 'C', 'TypeScript', 'Java', 'SQL', 'FastAPI', 'PostgreSQL', 'Docker', 'Linux', 'React', 'Git'
+const SKILLS = [
+  'TypeScript', 'Python', 'C++', 'C', 'Rust', 'Java', 'SQL',
+  'React', 'Electron', 'Node.js', 'FastAPI', 'SQLite', 'PostgreSQL',
+  'Docker', 'Linux', 'Git',
 ]
 
 /* ───────────────────────────────────────────── */
