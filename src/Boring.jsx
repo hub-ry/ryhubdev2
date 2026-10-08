@@ -30,7 +30,7 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-    name: 'OpenTicket - event ticketing',
+    name: 'Event Ticketing Platform',
     // Source stays private: the README documents real attack surface (a scan
     // only marks the ticket used at the station that scanned it), so linking
     // the repo would publish the weaknesses along with the design.
