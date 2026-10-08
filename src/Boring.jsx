@@ -63,8 +63,8 @@ const PROJECTS = [
 ]
 
 const SKILLS = [
-  'C++', 'C', 'Rust', 'Python', 'TypeScript',
-  'Linux', 'Git', 'React', 'Electron', 'Node.js',
+  'C++', 'C', 'Python', 'TypeScript',
+  'Linux', 'Git', 'React', 'Node.js',
   'SQL', 'PostgreSQL', 'SQLite', 'FastAPI', 'Docker', 'Java',
 ]
 
