@@ -351,6 +351,152 @@ body {
   color: var(--muted);
 }
 
+/* ── Currently ── */
+
+.cur-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.cur-card {
+  padding: 20px 22px;
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  border-radius: 10px;
+}
+
+.cur-card .r-label {
+  margin-bottom: 14px;
+}
+
+.cur-quiet {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.cur-skeleton {
+  height: 64px;
+}
+
+.cur-music {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cur-art {
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: var(--border);
+}
+
+.cur-track {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cur-title {
+  align-self: flex-start;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cur-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.cur-live {
+  color: var(--chart-l3);
+}
+
+.cur-bar {
+  flex: 1;
+  min-width: 40px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border);
+}
+
+.cur-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--muted);
+}
+
+.cur-time {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cur-setup {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 10px 22px;
+  font-size: 13px;
+}
+
+.cur-setup > div {
+  display: contents;
+}
+
+.cur-setup dt {
+  color: var(--muted);
+}
+
+.cur-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.cur-row-note {
+  display: block;
+  margin-top: 4px;
+}
+
+.cur-credit {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.cur-credit .r-link {
+  font-size: inherit;
+}
+
+/* ── Software ── */
+
+.sw-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.sw-list li::marker {
+  color: var(--muted);
+}
+
+.sw-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
 /* ── Home ── */
 /* Same colors as the resume, set in Hack (self-hosted, from dum-intern's site). */
 
@@ -494,5 +640,31 @@ body {
   .r-entry-row {
     flex-direction: column;
     gap: 2px;
+  }
+
+  .cur-card {
+    padding: 16px 18px;
+  }
+}
+
+/* Too narrow for art, label, bar and time on one row: label and time share the
+   first row and the bar takes the full width under them. */
+@media (max-width: 400px) {
+  .cur-music {
+    align-items: flex-start;
+  }
+
+  .cur-progress {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .cur-bar {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .cur-time {
+    margin-left: auto;
   }
 }

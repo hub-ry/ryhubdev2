@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "node scripts/plan-smoke.mjs",
-    "gamedata": "node scripts/build-gamedata.mjs"
+    "gamedata": "node scripts/build-gamedata.mjs",
+    "spotify-auth": "node --env-file=.env.local scripts/spotify-auth.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
