@@ -23,7 +23,10 @@ async function accessToken() {
     },
     body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: SPOTIFY_REFRESH_TOKEN }),
   })
-  if (!r.ok) throw new Error(`token exchange failed: ${r.status}`)
+  if (!r.ok) {
+    const { error } = await r.json().catch(() => ({}))
+    throw new Error(`token exchange failed: ${r.status} ${error ?? ''}`.trim())
+  }
   const json = await r.json()
   // Renew a minute early so a token never expires mid-request.
   cached = { token: json.access_token, expires: Date.now() + (json.expires_in - 60) * 1000 }
@@ -82,9 +85,12 @@ export default async function handler(req, res) {
     // window, and a song change still shows within seconds.
     res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=20')
     res.status(200).json(body)
-  } catch {
+  } catch (err) {
+    console.error(err)
     // Drop the cached token: if it was revoked, the next request mints a new one.
     cached = { token: null, expires: 0 }
-    res.status(502).json({ error: 'upstream request failed' })
+    // The detail names the failing step, e.g. "token exchange failed: 400
+    // invalid_grant". It never carries a credential, so it's safe to return.
+    res.status(502).json({ error: 'upstream request failed', detail: err.message })
   }
 }
