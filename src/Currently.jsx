@@ -29,6 +29,10 @@ const SETUP = [
     ],
   },
   {
+    label: 'mac',
+    tools: [{ name: 'Vorssaint', href: 'https://github.com/vorssaint/vorssaint-utils', note: 'menu bar, Dynamic Island, window snapping' }],
+  },
+  {
     label: 'agent',
     tools: [{ name: 'omp', href: 'https://omp.sh' }],
   },
