@@ -41,11 +41,11 @@ const PROJECTS = [
     note: 'Private source; implementation details available on request.',
   },
   {
-    name: 'dum-intern - macOS learning companion',
+    name: 'dum-intern - learning workshop',
     href: 'https://github.com/hub-ry/dum-intern',
-    live: '',
-    tags: ['TypeScript', 'Electron', 'Node.js'],
-    desc: 'Electron app with zone-based learning context and a global skill tree that controls which code it may write. File edits are restricted to shared paths, checked against the last-read hash, and stored with a diff and revert action.',
+    live: 'https://dumintern.com',
+    tags: ['TypeScript', 'Node.js', 'Docker'],
+    desc: 'Hub-hosted learning workshop with study material, conceptual practice and teaching in one browser interface. A persistent worker uses Claude to build from saved teaching and context, verifies creations in an offline Docker browser, and prepares flip-through explanations with real screenshots and matching code. Corrections preserve earlier versions.',
   },
   {
     name: 'Swatch - clothing recommender',

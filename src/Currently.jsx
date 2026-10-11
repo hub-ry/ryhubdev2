@@ -52,7 +52,7 @@ const SETUP = [
 ]
 
 const PROJECTS = [
-  { name: 'dum-intern', href: 'https://github.com/hub-ry/dum-intern', line: 'Electron macOS companion with zone-based context, a global skill tree and skill-gated file edits.' },
+  { name: 'dum-intern', href: 'https://dumintern.com', line: 'Study examples, try concepts, then teach Dum in your own words. It builds creations on hub and explains them through flip-through screenshots and matching code.' },
   { name: 'swatch', href: 'https://swatch.ryhub.dev', line: 'Python/FastAPI recommender using image embeddings, multiple taste clusters and batch ranking with brand and garment-type limits.' },
 ]
 
@@ -187,8 +187,8 @@ export default function Currently({ dark, setDark }) {
           </Card>
         </div>
         <p className="cur-notes">
-          <a className="r-link" href="https://feyn.ryhub.dev" target="_blank" rel="noopener noreferrer">notes</a>
-          {' '}<span className="cur-quiet">- teaching slides from Feynman Slides</span>
+          <a className="r-link" href="https://notes.ryhub.dev" target="_blank" rel="noopener noreferrer">notes</a>
+          {' '}<span className="cur-quiet">- a read-only learning journal, published through Dum</span>
         </p>
       </main>
 
