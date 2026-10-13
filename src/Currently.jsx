@@ -37,6 +37,10 @@ const SETUP = [
     tools: [{ name: 'omp', href: 'https://omp.sh' }],
   },
   {
+    label: 'browser',
+    tools: [{ name: 'BrowserOS', href: 'https://www.browseros.com', note: 'the browser my agents drive, on the mac and on hub' }],
+  },
+  {
     label: 'models',
     tools: [
       { name: 'Claude Code', href: 'https://claude.com/product/claude-code', note: 'Opus 5.5 High writes the code (Max plan)' },
@@ -51,7 +55,7 @@ const SETUP = [
       { name: 'Ollama', href: 'https://ollama.com' },
       { name: 'Cloudflare Tunnel', href: 'https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/' },
     ],
-    note: 'an always-on Ubuntu box (HP Pavilion, Ryzen 5) the agents run on',
+    note: 'an always-on Ubuntu box (HP Pavilion, Ryzen 5) the agents run on. Its screen streams to my Discord while they work.',
   },
 ]
 
