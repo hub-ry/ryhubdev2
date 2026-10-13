@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useLayoutEffect, useRef, useState } from 'react'
 import { motion as Motion } from 'framer-motion'
 
 function level(count) {
@@ -95,12 +95,54 @@ export function ChartGrid({ weeks, cellSize = 11, gap = 3, showTooltip = false, 
   )
 }
 
+// Columns in a year of contributions. Used to size the skeleton before the
+// real calendar arrives, so the fitted placeholder matches the loaded chart.
+const DEFAULT_WEEKS = 53
+
+// Largest cell/gap pair, at most the requested size and keeping its
+// proportions, that lays `weeks` columns out within `width`. Sizes snap to
+// whole device pixels so every square and gap renders identically instead of
+// alternating between neighbouring pixel widths.
+function fitGrid(width, weeks, cellSize, gap) {
+  const natural = weeks * cellSize + (weeks - 1) * gap
+  if (!width || natural <= width) return { cell: cellSize, gap }
+  const dpr = window.devicePixelRatio || 1
+  for (let cellDev = Math.floor(cellSize * dpr); cellDev >= 1; cellDev--) {
+    const gapDev = Math.max(1, Math.round((cellDev * gap) / cellSize))
+    if (weeks * cellDev + (weeks - 1) * gapDev <= width * dpr) {
+      return { cell: cellDev / dpr, gap: gapDev / dpr }
+    }
+  }
+  return { cell: 1 / dpr, gap: 1 / dpr }
+}
+
+// Width of the element behind `ref`, tracked as it resizes. Measured before
+// paint so a narrow screen never shows the full-size chart first.
+function useWidth() {
+  const ref = useRef(null)
+  const [width, setWidth] = useState(0)
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    setWidth(el.clientWidth)
+    const ro = new ResizeObserver(([entry]) => setWidth(entry.contentRect.width))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  return [ref, width]
+}
+
 export default function GitHubChart({ calendar, loading, cellSize = 11, gap = 3 }) {
-  const gridHeight = 7 * cellSize + 6 * gap
+  const [wrapRef, width] = useWidth()
+  const weeks = calendar?.weeks.length || DEFAULT_WEEKS
+  // Desktop keeps the requested size; narrow screens scale the whole year
+  // down to fit rather than cutting off the most recent weeks.
+  const fit = fitGrid(width, weeks, cellSize, gap)
+  const gridHeight = 7 * fit.cell + 6 * fit.gap
 
   if (loading || !calendar) {
     return (
-      <div className="chart-wrap">
+      <div className="chart-wrap" ref={wrapRef}>
         <div className="chart-skeleton" style={{ height: gridHeight }} />
         <p className="chart-meta">&nbsp;</p>
       </div>
@@ -108,8 +150,8 @@ export default function GitHubChart({ calendar, loading, cellSize = 11, gap = 3 
   }
 
   return (
-    <div className="chart-wrap">
-      <ChartGrid weeks={calendar.weeks} showTooltip cellSize={cellSize} gap={gap} />
+    <div className="chart-wrap" ref={wrapRef}>
+      <ChartGrid weeks={calendar.weeks} showTooltip cellSize={fit.cell} gap={fit.gap} />
       <p className="chart-meta">
         {calendar.totalContributions.toLocaleString()} contributions in the last year
       </p>

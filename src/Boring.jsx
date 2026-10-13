@@ -30,14 +30,14 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-    name: 'Event Ticketing Platform',
+    name: 'Event Ticketing System',
     // Source stays private: the README documents real attack surface (a scan
     // only marks the ticket used at the station that scanned it), so linking
     // the repo would publish the weaknesses along with the design.
     href: '',
     live: '',
-    tags: ['Python', 'FastAPI', 'PostgreSQL'],
-    desc: 'FastAPI backend with Stripe checkout and Ed25519-signed QR tickets. A scanner PWA verifies tickets locally after its initial load and syncs scans when connectivity returns.',
+    tags: ['Python', 'FastAPI', 'SQLite', 'Stripe', 'Ed25519'],
+    desc: 'FastAPI backend with Stripe checkout and emailed QR tickets. Gate entry needs no network: standalone door laptops verify Ed25519-signed QR codes with only the public key, reading USB barcode scanners against a local SQLite snapshot. Conditional UPDATEs prevent overselling and double entry, Stripe webhooks apply exactly once, and 90 PyTest tests cover the purchase and scan races.',
     note: 'Private source; implementation details available on request.',
   },
   {
@@ -103,7 +103,7 @@ export default function Boring({ dark, setDark }) {
   const stars = useStars()
 
   return (
-    <div className="page">
+    <div className="page page--resume">
       <a className="back-home" href="/">← home</a>
 
       <main className="resume">

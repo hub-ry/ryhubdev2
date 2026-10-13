@@ -636,6 +636,19 @@ body {
     gap: 2px;
   }
 
+  /* Tags sit under the title here, so a wrapped row starts at the left edge
+     with the rest of the entry instead of hanging off the right. */
+  .r-tags {
+    justify-content: flex-start;
+  }
+
+  /* No side margin to sit in at this width, so fixed corner controls would
+     ride over the entries while scrolling. Let them scroll away instead. */
+  .page--resume .back-home,
+  .page--resume .theme-toggle {
+    position: absolute;
+  }
+
   .cur-card {
     padding: 16px 18px;
   }
