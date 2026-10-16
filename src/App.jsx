@@ -1,7 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import Home from './Home'
 import Boring from './Boring'
-import Currently from './Currently'
 
 // /clash carries a bundled Clash of Clans dataset. Loading it lazily keeps the
 // landing page and resume from paying for it.
@@ -10,7 +9,6 @@ const Clash = lazy(() => import('./clash/Clash.jsx'))
 const routeFor = (path) => {
   if (path === '/resume' || path.startsWith('/resume/')) return 'resume'
   if (path === '/clash' || path.startsWith('/clash/')) return 'clash'
-  if (path === '/currently' || path.startsWith('/currently/')) return 'currently'
   return 'home'
 }
 
@@ -24,7 +22,6 @@ function App() {
   const route = routeFor(window.location.pathname)
 
   if (route === 'resume') return <Boring dark={dark} setDark={setDark} />
-  if (route === 'currently') return <Currently dark={dark} setDark={setDark} />
   if (route === 'clash') {
     return (
       <Suspense fallback={<div className="page" />}>

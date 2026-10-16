@@ -18,7 +18,6 @@ export default function Home() {
 
         <nav className="home-links">
           <a href="/resume">ryhub.dev/resume</a>
-          <a href="/currently">ryhub.dev/currently</a>
         </nav>
       </main>
     </div>
