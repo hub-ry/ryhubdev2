@@ -250,18 +250,6 @@ body {
   color: var(--muted);
 }
 
-.r-bullets {
-  margin-top: 6px;
-  padding-left: 1.15em;
-  font-size: 13px;
-  line-height: 1.55;
-  color: var(--muted);
-}
-
-.r-bullets li + li {
-  margin-top: 2px;
-}
-
 /* ── Projects ── */
 
 .r-proj-head {

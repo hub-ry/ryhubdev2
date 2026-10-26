@@ -34,21 +34,12 @@ const PROJECTS = [
     href: 'https://github.com/hub-ry/sandbox',
     live: '',
     tags: ['C++', 'Linux'],
-    bullets: [
-      'runs programs you don\'t trust, each in its own little space',
-      'stops them if they hog the cpu or memory',
-      'starts in under 50 ms, and can run 20 at once',
-    ],
   },
   {
     name: 'Dum',
     href: 'https://github.com/hub-ry/dum-intern',
     live: 'https://dumintern.com',
     tags: ['TypeScript', 'Node.js', 'Linux'],
-    bullets: [
-      "created pair programming tool using vm's",
-      "the 'intern' can only write what it's been taught",
-    ],
   },
   {
     name: 'clothingRec',
@@ -56,11 +47,6 @@ const PROJECTS = [
     // The rating site is private. Do not add a public demo link.
     live: '',
     tags: ['Python', 'SQLite', 'CLIP', 'DeepSeek'],
-    bullets: [
-      'turns your taste into real, cheap clothes, with links',
-      'about 2,200 pieces from 4 stores, grouped by how they look',
-      'still working on a friends site: send a board, get a mood board with links',
-    ],
   },
   {
     name: 'Event Ticketing System',
@@ -70,11 +56,6 @@ const PROJECTS = [
     href: '',
     live: '',
     tags: ['Python', 'FastAPI', 'SQLite', 'Stripe', 'Ed25519'],
-    bullets: [
-      'you buy a ticket and get a qr code in your email',
-      'the door can check it with no internet',
-      'the same ticket can\'t be sold twice, or scanned twice',
-    ],
     note: 'Private source; implementation details available on request.',
   },
   {
@@ -82,33 +63,18 @@ const PROJECTS = [
     href: 'https://github.com/hub-ry/dum-learn',
     live: '',
     tags: ['JavaScript', 'Node.js', 'LaTeX'],
-    bullets: [
-      'a place to learn something when you\'re stuck',
-      'type what you don\'t get, and it writes a short explainer',
-      'chat next to it, or jump back to the idea it builds on',
-    ],
   },
   {
     name: 'chart-to-orc',
     href: 'https://github.com/hub-ry/chart-to-orc',
     live: '',
     tags: ['Python', 'Docker', 'NATS'],
-    bullets: [
-      'draw a chart of boxes and arrows',
-      'it becomes little helpers that only talk along those arrows',
-      'runs on your machine, just for you',
-    ],
   },
   {
     name: 'Self-Hosted Health Data Platform',
     href: '',
     live: '',
     tags: ['Python', 'Svelte', 'Tailscale'],
-    bullets: [
-      'tracks your health numbers over time',
-      'you look at them on a dashboard you host yourself',
-      'only people on your private network can open it',
-    ],
   },
 ]
 
@@ -223,11 +189,6 @@ export default function Boring({ dark, setDark }) {
                   ))}
                 </span>
               </div>
-              {p.bullets && (
-                <ul className="r-bullets">
-                  {p.bullets.map(b => <li key={b}>{b}</li>)}
-                </ul>
-              )}
               {p.desc && <p className="r-entry-line">{p.desc}</p>}
               {p.note && <p className="r-entry-note">{p.note}</p>}
             </div>
