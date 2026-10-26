@@ -17,25 +17,14 @@ const LINKS = [
   // { label: 'resume', href: '/hubbart_resume.pdf' },
 ]
 
-// Public page. Grand Prix is not on the current resume, so it stays off.
+// Public page — deliberately only the internship. BoilerMake and Purdue Grand
+// Prix stay on the PDF resume only, since anyone can find this page.
 const EXPERIENCE = [
   {
     org: 'Lynco Products',
     date: 'Jun – Aug 2026',
     line: 'Full Stack Software Engineer Intern',
-    note: 'Invited to return, Winter 2026. Replaced 4–5 hours a day of manual rate shopping for 500+ weekly orders with a React app and config-driven scripts on an always-on Linux server that query carrier APIs and pick the cheapest rate. A Python pipeline parses FedEx billing PDFs into structured data, cutting about 6 hours a week of manual entry. Co-designed the GitLab CI/CD pipeline (dev, staging, prod) that in-development apps deploy through, moved untracked production SQL stored procedures into version control, and rolled out AI coding agents to the five-person dev team. They are used daily, including multi-agent workflows where parallel subagents take file locks so they do not overwrite each other.',
-  },
-  {
-    org: 'BoilerMake',
-    date: 'Apr 2025 – Present',
-    line: 'Outreach Team Lead',
-    note: 'Leads a six-person outreach team for Purdue\'s 500-person hackathon. A TypeScript Discord bot automates sponsor research, email verification, and outreach drafting, with code-enforced permissions and human sign-off on risky actions, and helped secure $10,000+ in sponsorships. Analyzed 1,000+ applications by major, year, and school to retarget outreach, growing the audience 9.5% in 5 months.',
-  },
-  {
-    org: 'Purdue Hackers',
-    date: 'Aug 2026 – Present',
-    line: 'Organizer',
-    note: 'Helped organize Codex Cafe, an invite-only workshop with OpenAI for about 40 student developers, handling logistics and venue selection. Helps run weekly Hack Nights, six-hour build sessions that end with students showcasing their projects at midnight.',
+    note: 'Built internal React tools, a multi-carrier shipping rate engine, and a Debian development server for a five-person team.',
   },
 ]
 
@@ -45,19 +34,21 @@ const PROJECTS = [
     href: 'https://github.com/hub-ry/sandbox',
     live: '',
     tags: ['C++', 'Linux'],
-    desc: 'A daemon that runs untrusted programs in isolation. Linux namespaces give each job its own process, filesystem, and network view, and seccomp filters block disallowed system calls. cgroups cap each job\'s CPU and memory and stop jobs that exceed their limits. Starts a sandbox in under 50 ms and runs 20 concurrent jobs on one machine.',
+    bullets: [
+      'runs programs you don\'t trust, each in its own little space',
+      'stops them if they hog the cpu or memory',
+      'starts in under 50 ms, and can run 20 at once',
+    ],
   },
   {
     name: 'Dum',
     href: 'https://github.com/hub-ry/dum-intern',
     live: 'https://dumintern.com',
-    // The Maritime desktop is on main, and the resume still calls this
-    // "Building". dumintern.com is the introduction; it says the public
-    // screen-sharing flow is not available yet.
-    wip: true,
     tags: ['TypeScript', 'Node.js', 'Linux'],
-    desc: 'Building an AI intern you watch code on its own cloud Linux VM and teach through a skill tree. A locked skill stays locked until you explain it, and the intern refuses any task that needs a skill you have not taught yet. The Node.js server checks shell commands against unlocked skills before they run, and connects the intern to a live VM desktop through Maritime (exec, file I/O, screenshots, and watch links).',
-    note: 'dumintern.com is the introduction. The Maritime desktop is in the source.',
+    bullets: [
+      "created pair programming tool using vm's",
+      "the 'intern' can only write what it's been taught",
+    ],
   },
   {
     name: 'clothingRec',
@@ -65,8 +56,11 @@ const PROJECTS = [
     // The rating site is private. Do not add a public demo link.
     live: '',
     tags: ['Python', 'SQLite', 'CLIP', 'DeepSeek'],
-    desc: 'A clothing recommender that turns your taste into real, cheap pieces with links. About 2,200 products from 4 menswear stores\' Shopify feeds are upserted into SQLite, and product photos are embedded with CLIP (ViT-B/32) for k-means style clustering. The v2.1 rating site runs on a home server with stdlib Python, systemd, and a Cloudflare Tunnel, behind private per-person links. 231 ratings are the eval set for a DeepSeek vision taste summary, spend-guarded at under $0.001 per call. A vision model turns a Pinterest board (91 pins) into a taste profile and keywords. Agents then find the cheapest close new matches and search used listings through typed Depop and eBay queries, with no scraping. Results come back as linked mood boards, refined over feedback rounds.',
-    note: 'In progress: a friends-facing site where people submit a board or screenshots and get a mood board with links (IP rate-limited, one free board without a code), growing into an automated resale-sourcing business. Built on chart-to-orc and the C++ sandbox.',
+    bullets: [
+      'turns your taste into real, cheap clothes, with links',
+      'about 2,200 pieces from 4 stores, grouped by how they look',
+      'still working on a friends site: send a board, get a mood board with links',
+    ],
   },
   {
     name: 'Event Ticketing System',
@@ -76,7 +70,11 @@ const PROJECTS = [
     href: '',
     live: '',
     tags: ['Python', 'FastAPI', 'SQLite', 'Stripe', 'Ed25519'],
-    desc: 'FastAPI backend with Stripe checkout and emailed QR tickets. Gate entry needs no network: standalone door laptops verify Ed25519-signed QR codes with only the public key, reading USB barcode scanners against a local SQLite snapshot. Conditional UPDATEs prevent overselling and double entry, Stripe webhooks apply exactly once, and 90 PyTest tests cover the purchase and scan races.',
+    bullets: [
+      'you buy a ticket and get a qr code in your email',
+      'the door can check it with no internet',
+      'the same ticket can\'t be sold twice, or scanned twice',
+    ],
     note: 'Private source; implementation details available on request.',
   },
   {
@@ -84,35 +82,33 @@ const PROJECTS = [
     href: 'https://github.com/hub-ry/dum-learn',
     live: '',
     tags: ['JavaScript', 'Node.js', 'LaTeX'],
-    desc: 'The other half of the dum stack: a keyboard-first place to learn something when you are stuck. A prompt becomes a 1 to 3 page LaTeX PDF explainer, with chat beside the file and prerequisite branching before it writes. The model key stays on the server, behind a passcode, with daily caps.',
+    bullets: [
+      'a place to learn something when you\'re stuck',
+      'type what you don\'t get, and it writes a short explainer',
+      'chat next to it, or jump back to the idea it builds on',
+    ],
   },
   {
     name: 'chart-to-orc',
     href: 'https://github.com/hub-ry/chart-to-orc',
     live: '',
     tags: ['Python', 'Docker', 'NATS'],
-    desc: 'Draw a chart and it compiles to a graph of agents. Each agent runs in its own Docker container, and a NATS broker limits messages to the edges that were drawn. A host-side proxy holds the model key and meters each graph. Loopback only, for one trusted user.',
-  },
-  {
-    name: 'scheduler',
-    href: 'https://github.com/hub-ry/scheduler',
-    live: 'https://scheduler.ryhub.dev',
-    tags: ['TypeScript', 'Python', 'SQLite'],
-    desc: 'Picks club event dates that miss the exams the audience is actually sitting. Paste the registrar exam table, weight the courses, and it ranks open evenings by how much attendance a slot would cost. FastAPI and SQLite on a Linux box, reached through a Cloudflare Tunnel.',
-  },
-  {
-    name: 'clash-optimization',
-    href: 'https://github.com/hub-ry/clash-optimization',
-    live: 'https://ryhub.dev/clash',
-    tags: ['JavaScript'],
-    desc: 'Reads a Clash of Clans village export and lists the upgrades to take next. This is the planner behind /clash, and the whole clan uses it.',
+    bullets: [
+      'draw a chart of boxes and arrows',
+      'it becomes little helpers that only talk along those arrows',
+      'runs on your machine, just for you',
+    ],
   },
   {
     name: 'Self-Hosted Health Data Platform',
     href: '',
     live: '',
     tags: ['Python', 'Svelte', 'Tailscale'],
-    desc: 'Python ingestion API and Svelte dashboard for time-series health data. Runs on Linux with access restricted to a private Tailscale network.',
+    bullets: [
+      'tracks your health numbers over time',
+      'you look at them on a dashboard you host yourself',
+      'only people on your private network can open it',
+    ],
   },
 ]
 
@@ -227,6 +223,11 @@ export default function Boring({ dark, setDark }) {
                   ))}
                 </span>
               </div>
+              {p.bullets && (
+                <ul className="r-bullets">
+                  {p.bullets.map(b => <li key={b}>{b}</li>)}
+                </ul>
+              )}
               {p.desc && <p className="r-entry-line">{p.desc}</p>}
               {p.note && <p className="r-entry-note">{p.note}</p>}
             </div>

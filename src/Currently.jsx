@@ -60,9 +60,9 @@ const SETUP = [
 ]
 
 const PROJECTS = [
-  { name: 'sandbox', href: 'https://github.com/hub-ry/sandbox', line: 'C++ daemon that runs untrusted programs in isolation with Linux namespaces, seccomp, and cgroups. Starts a sandbox in under 50 ms and runs 20 concurrent jobs on one machine.' },
-  { name: 'dum-intern', href: 'https://dumintern.com', line: 'Building an AI intern you watch code on its own cloud Linux VM and teach through a skill tree. It refuses a task that needs a skill you have not taught yet.' },
-  { name: 'clothingRec', href: 'https://github.com/hub-ry/clothesRec', line: 'A clothing recommender that turns your taste into real, cheap pieces with links.' },
+  { name: 'sandbox', href: 'https://github.com/hub-ry/sandbox', line: 'runs programs you don\'t trust. starts in under 50 ms, and can run 20 at once.' },
+  { name: 'dum-intern', href: 'https://dumintern.com', line: 'pair programming tool using vm\'s. the intern can only write what it\'s been taught.' },
+  { name: 'clothingRec', href: 'https://github.com/hub-ry/clothesRec', line: 'turns your taste into real, cheap clothes, with links.' },
 ]
 
 /* ───────────────────────────────────────────── */
