@@ -1,6 +1,6 @@
 import GitHubChart from './GitHubChart'
 import { useContributions } from './useContributions'
-import { useStars } from './useStars'
+// import { useStars } from './useStars'
 import ThemeToggle from './ThemeToggle'
 
 /* ─────────────────────────────────────────────
@@ -28,6 +28,8 @@ const EXPERIENCE = [
   },
 ]
 
+// Projects hidden for now. Uncomment this and the section below to bring them back.
+/*
 const PROJECTS = [
   {
     name: 'C++ Sandbox',
@@ -77,6 +79,7 @@ const PROJECTS = [
     tags: ['Python', 'Svelte', 'Tailscale'],
   },
 ]
+*/
 
 const SKILLS = [
   'C++', 'C', 'Python', 'TypeScript', 'JavaScript', 'Java', 'Bash',
@@ -87,6 +90,7 @@ const SKILLS = [
 
 /* ───────────────────────────────────────────── */
 
+/*
 // "owner/name" from a github.com project link, so a project can look up its
 // own star count.
 function repoKey(href) {
@@ -104,6 +108,7 @@ function Stars({ count }) {
     </span>
   )
 }
+*/
 
 function Section({ label, children }) {
   return (
@@ -116,7 +121,7 @@ function Section({ label, children }) {
 
 export default function Boring({ dark, setDark }) {
   const { calendar, loading } = useContributions()
-  const stars = useStars()
+  // const stars = useStars()
 
   return (
     <div className="page page--resume">
@@ -155,15 +160,16 @@ export default function Boring({ dark, setDark }) {
           ))}
         </Section>
 
+        {/* Projects section commented out for now.
         <Section label="Projects">
           {PROJECTS.map(p => (
             <div key={p.name} className="r-entry">
               <div className="r-entry-row">
                 <span className="r-proj-head">
-                  {/* The title goes to whatever best shows the project: the
-                      running site if there is one, otherwise the repo. Entries
-                      with neither are work in progress, so render plain text
-                      rather than an anchor that goes nowhere. */}
+                  The title goes to whatever best shows the project: the
+                  running site if there is one, otherwise the repo. Entries
+                  with neither are work in progress, so render plain text
+                  rather than an anchor that goes nowhere.
                   {(p.live || p.href) ? (
                     <a className="r-link" href={p.live || p.href} target="_blank" rel="noopener noreferrer">
                       {p.name}
@@ -171,11 +177,11 @@ export default function Boring({ dark, setDark }) {
                   ) : (
                     <span className="r-proj-name">{p.name}</span>
                   )}
-                  {/* Only once a repo actually has stars - a "0" next to a
-                      project reads worse than no counter at all. */}
+                  Only once a repo actually has stars - a "0" next to a
+                  project reads worse than no counter at all.
                   {stars[repoKey(p.href)] > 0 && <Stars count={stars[repoKey(p.href)]} />}
-                  {/* Only when the title took the live link, so the repo still
-                      has somewhere to be. */}
+                  Only when the title took the live link, so the repo still
+                  has somewhere to be.
                   {p.live && p.href && (
                     <a className="r-side" href={p.href} target="_blank" rel="noopener noreferrer">
                       [source →]
@@ -194,6 +200,7 @@ export default function Boring({ dark, setDark }) {
             </div>
           ))}
         </Section>
+        */}
 
         <Section label="Skills">
           <div className="r-chips">
