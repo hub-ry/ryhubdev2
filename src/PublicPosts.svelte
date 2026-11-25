@@ -73,7 +73,16 @@
         <ul class="link-list">
           {#each filtered as post (post.id)}
             <li>
-              <a href={`#blog/${post.id}`}>{post.title}</a>{#if post.author}<small>{` by ${post.author}`}</small>{/if}
+              <a href={`#blog/${post.id}`}>{post.title}</a>
+              {#if post.author || post.date}
+                {' '}<small class="post-meta">
+                  {#if post.author}by {post.author}{/if}
+                  {#if post.date}
+                    {@const [year, month, day] = post.date.split('-')}
+                    {#if post.author}{' · '}{/if}<time class="post-date" datetime={post.date}>{month}/{day}/{year}</time>
+                  {/if}
+                </small>
+              {/if}
             </li>
           {/each}
         </ul>
@@ -117,6 +126,16 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 8rem);
     gap: 1rem;
     overflow-wrap: anywhere;
+  }
+
+  .post-meta {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .post-date {
+    color: #6b6b6b;
+    white-space: nowrap;
   }
 
   aside {
