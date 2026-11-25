@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  background: #e8e4dc;
+}
+
+h2,
+.section-title {
+  text-align: center;
+}
+
+.page-title {
+  font-size: inherit;
+  font-weight: bold;
+  margin-block: 1em;
+}
+
+.link-list {
+  margin-block: 1em;
+  padding-inline-start: 40px;
+  list-style: disc outside;
+}
+
+a[href] {
+  color: #0000ee;
+  text-decoration: underline;
+}
+
+a[href].visited {
+  color: #191970;
+}

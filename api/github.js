@@ -1,54 +1,26 @@
 // Vercel serverless function.
-// Proxies a small, fixed set of GitHub GraphQL queries so the token
-// stays server-side and never reaches the browser bundle.
+// Keeps the GitHub token out of the browser.
 
 const USERNAME = 'hub-ry'
 
-const QUERIES = {
-  contributions: `{
-    user(login: "${USERNAME}") {
-      contributionsCollection {
-        contributionCalendar {
-          totalContributions
-          weeks {
-            contributionDays {
-              contributionCount
-              date
-            }
+const query = `{
+  user(login: "${USERNAME}") {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            contributionCount
+            date
           }
         }
       }
     }
-  }`,
-  stars: `{
-    user(login: "${USERNAME}") {
-      repositories(first: 100, ownerAffiliations: OWNER, privacy: PUBLIC) {
-        nodes {
-          nameWithOwner
-          stargazerCount
-        }
-      }
-    }
-  }`,
-  projects: `{
-    user(login: "${USERNAME}") {
-      pinnedItems(first: 6, types: REPOSITORY) {
-        nodes {
-          ... on Repository {
-            name
-            description
-            url
-            primaryLanguage { name color }
-          }
-        }
-      }
-    }
-  }`,
-}
+  }
+}`
 
 export default async function handler(req, res) {
-  const query = QUERIES[req.query.type]
-  if (!query) {
+  if (req.query.type !== 'contributions') {
     res.status(400).json({ error: 'unknown query type' })
     return
   }
